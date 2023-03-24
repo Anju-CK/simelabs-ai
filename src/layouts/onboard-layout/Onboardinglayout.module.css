@@ -1,0 +1,33 @@
+
+.defaultlayout{
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  
+}
+.leftlayout{
+  width: 100%;
+  flex: 1;
+  height: auto;
+  min-height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(56, 136, 168);
+  font-size: 100px;
+  font-style:oblique;
+  border-radius: 10px;
+}
+.rightlayout{
+  width: 100%;
+  flex: 1;
+  height: auto;
+  min-height: 100vh;
+  background-color: rgb(56, 136, 168);
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
