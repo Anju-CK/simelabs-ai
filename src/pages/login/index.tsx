@@ -1,23 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import OnboardingLayout from "../../layouts/onboard-layout";
 import styles from "./Login.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import useApi from "../../hooks/useApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function Login() {
+  const [loginError, setLoginError] = useState<string | undefined>(undefined);
+
+  const navigate = useNavigate();
   const { data, error, fetchData } = useApi(
     "/users/login/",
     "POST",
     undefined,
     true
   );
-  // console.log(data)
-  // console.log(error)
-  const onSubmitHandler = (values: any) => {
-    console.log(values);
-    fetchData(values);
+
+  const onSubmitHandler = (values: any, { setErrors }: any) => {
+    fetchData(
+      values,
+      (res) => {
+        Cookies.set("token", res.token);
+        navigate("/home");
+      },
+      (res) => {
+        if (res.message) setLoginError("Incorrect Login credentials!");
+      }
+    );
   };
   return (
     <OnboardingLayout>
@@ -53,9 +64,12 @@ export default function Login() {
                     onBlur={handleBlur}
                     className={styles.input}
                   />
-                  <ErrorMessage name="email" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
-                  }} />
+                  <ErrorMessage
+                    name="email"
+                    render={(msg) => {
+                      return <span style={{ color: "#f00" }}>{msg}</span>;
+                    }}
+                  />
                 </div>
                 <div>
                   <Field
@@ -70,14 +84,25 @@ export default function Login() {
                     onBlur={handleBlur}
                     className={styles.input}
                   />
-                  <ErrorMessage name="password" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
-                  }} />
+                  <ErrorMessage
+                    name="password"
+                    render={(msg) => {
+                      return <span style={{ color: "#f00" }}>{msg}</span>;
+                    }}
+                  />
                 </div>
-                <button type="submit" className={styles.login}>
+                <button type="submit" name="login" className={styles.login}>
                   login
                 </button>
-                <div className={styles.account}>Don't have an account yet? <Link to="/signup" className={styles.signup}>Sign up</Link></div>
+                <span className={styles.error}>
+                  {loginError !== undefined ? loginError : ""}
+                </span>
+                <div className={styles.account}>
+                  Don't have an account yet?{" "}
+                  <Link to="/signup" className={styles.signup}>
+                    Sign up
+                  </Link>
+                </div>
               </Form>
             )}
           </Formik>
