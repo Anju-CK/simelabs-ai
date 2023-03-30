@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const port = process.env.REACT_APP_PORT_NO;
 
-const endpoint = `${apiUrl}${port?port:''}`;
+const endpoint = `${apiUrl}${port ? `:${port}` : ""}`;
 
 interface ApiResponse<T> {
   data: {
@@ -13,7 +13,11 @@ interface ApiResponse<T> {
   } | null;
   error: string | null;
   loading: boolean;
-  fetchData: (values?: any, onSuccess?: (res: any) => void) => void;
+  fetchData: (
+    values?: any,
+    onSuccess?: (res: any) => void,
+    onError?: (res: any) => void
+  ) => void;
 }
 
 type headerOptions = {
@@ -43,9 +47,11 @@ function useApi<T>(
     const headers: headerOptions = {
       "Content-Type": "application/json",
     };
+
     if (!authNotRequired) {
-      headers["Authorization"] = `Bearer ${token}`;
+      headers["Authorization"] = `Token ${token}`;
     }
+
     const queryParams = params
       ? `?${new URLSearchParams(params).toString()}`
       : "";
@@ -59,11 +65,11 @@ function useApi<T>(
         body: body ? JSON.stringify(body) : undefined,
       });
       const responseData = await response.json();
-      if (!(response?.status.toString().startsWith("2"))) {
+      if (!response?.status.toString().startsWith("2")) {
         setError(responseData);
         if (responseData?.status === 401) {
           Cookies.remove("token");
-          Cookies.remove("refreshToken");
+          // Cookies.remove("refreshToken");
           const queryParams = { q: "unauthorized" };
           const queryString = new URLSearchParams(queryParams).toString();
           navigate(`/?${queryString}`);
