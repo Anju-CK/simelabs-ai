@@ -127,9 +127,11 @@ export default function Signup() {
                   <ErrorMessage name="confirm_password" render={(msg)=>{
                     return <span style={{ color: '#f00'}}>{msg}</span>
                   }} />
-                <button type="submit" className={styles.signup}><Link to="/" className={styles.login}>Login</Link>
+                <button type="submit" className={styles.signup}><Link to="/" className={styles.loginbtn}>Login</Link>
                   signup
                 </button>
+                <div  className={styles.return}>Back to <Link to="/" className={styles.login}> Login</Link>
+                </div>
               </Form>
             )}
           </Formik>
