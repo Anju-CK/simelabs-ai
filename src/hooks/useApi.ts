@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const port = process.env.REACT_APP_PORT_NO;
@@ -56,7 +56,11 @@ function useApi<T>(
       ? `?${new URLSearchParams(params).toString()}`
       : "";
     const fullUrl = `${endpoint}${url}${queryParams}`;
+
     try {
+      console.log(headers);
+      console.log("body:", body);
+      console.log("url:", fullUrl);
       const response = await fetch(fullUrl, {
         method,
         headers: {

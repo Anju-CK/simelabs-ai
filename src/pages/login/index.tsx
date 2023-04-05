@@ -67,7 +67,7 @@ export default function Login() {
                   <ErrorMessage
                     name="email"
                     render={(msg) => {
-                      return <span style={{ color: "#f00" }}>{msg}</span>;
+                      return <span className={styles.errormsg}>{msg}</span>;
                     }}
                   />
                 </div>
@@ -87,7 +87,7 @@ export default function Login() {
                   <ErrorMessage
                     name="password"
                     render={(msg) => {
-                      return <span style={{ color: "#f00" }}>{msg}</span>;
+                      return <span className={styles.errormsg}>{msg}</span>;
                     }}
                   />
                 </div>

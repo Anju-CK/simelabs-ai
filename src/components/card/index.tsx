@@ -1,25 +1,32 @@
-import React from "react";
+import { capitalize } from "../../utils/capitalize";
+import { Subscriptionform } from "../subscription-form";
 import styles from "./Card.module.css";
-export default function Card() {
-  return (
-      <div className={styles.container}>
-        <div className={styles.container1}>Project Name</div>
-        <div className={styles.box}>
-          <div>
-            <div className={styles.container2}>
-              <div className={styles.text}>Hit Limit</div>
-              <div className={styles.text}>Current Usage</div>
-              <div className={styles.text}>Expiry</div>
-            </div>
 
-            <div className={styles.container2}>
-              <div className={styles.text}>0</div>
-              <div className={styles.text}>0</div>
-              <div className={styles.text}>0</div>
-            </div>
+export default function Card(props: any) {
+  if (props.hit_limit <= 0) {
+    return null;
+  }
+  return (
+    <div className={styles.container}>
+      <div className={styles.container1}>{capitalize(props.name)}</div>
+      <div className={styles.box}>
+        <div>
+          <div className={styles.container2}>
+            <div className={styles.text}>Hit Limit</div>
+            <div className={styles.text}>Current Usage</div>
+            <div className={styles.text}>Expiry</div>
           </div>
-          <button className={styles.subscribe}>Subscribe</button>
+
+          <div className={styles.container2}>
+            <div className={styles.text}>{props.hit_limit}</div>
+            <div className={styles.text}>{props.current_usage}</div>
+            <div className={styles.text}>{props.expiry}</div>
+          </div>
+        </div>
+        <div className={styles.subscribe}>
+          <Subscriptionform model_url={props.model_url} />
         </div>
       </div>
+    </div>
   );
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Onboardinglayout.module.css";
 type OnBoardingProps = {
   children: JSX.Element;

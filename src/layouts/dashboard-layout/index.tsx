@@ -1,4 +1,3 @@
-import React from "react";
 import Appheader from "../../components/appheader";
 import styles from "./Dashboardlayout.module.css";
 type DashboardlayoutProps = {
@@ -8,8 +7,8 @@ type DashboardlayoutProps = {
 export default function Dashboardlayout({ children }: DashboardlayoutProps) {
   return (
     <div className={styles.container}>
-      <Appheader />
+      <Appheader/>
       <div className={styles.innercontainer}>{children}</div>
-    </div>
+     </div>
   );
 }

@@ -1,6 +1,5 @@
 .container {
   margin-top: 40px;
-  width: 100%;
   height: 100%;
   background-color: rgb(172, 182, 195);
   border-radius: 10px;
@@ -10,6 +9,8 @@
   font-size: larger;
   font-weight: bold;
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
 }
 .container2{
   display: flex;
@@ -18,6 +19,8 @@
 }
 .text{
   width: 200px;
+  display: flex;
+  flex-direction: row;
 }
 .box{
   display: flex;

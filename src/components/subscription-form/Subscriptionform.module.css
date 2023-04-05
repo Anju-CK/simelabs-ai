@@ -1,0 +1,61 @@
+.container{
+    width:280px;
+    padding: 20px;
+    background-color: rgb(6, 75, 101);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    margin-top: 5px;
+    box-shadow: 0px 1px 18px 1px rgb(195, 173, 173);
+    color: white;
+}
+.inputbox{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.fieldcolor{
+    background-color: rgb(245, 234, 234);
+}
+.button{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.btntxt{
+    padding: 12px;
+    border-radius: 5px;
+    width:100px;
+    border: none;
+    color:rgb(35, 93, 116);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.update{
+    background-color: green;
+    color: white;
+}
+.cancel{
+    background-color: red;
+    color: white;
+}
+
+.subscribe{
+    background-color: rgb(56, 136, 168);
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 100px;
+    color: white;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }

@@ -1,4 +1,3 @@
-import React from "react";
 import OnboardingLayout from "../../layouts/onboard-layout";
 import styles from "./Signup.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -40,11 +39,7 @@ export default function Signup() {
               handleChange,
               values,
               errors,
-              touched,
-              isValid,
-              isSubmitting,
-              setSubmitting,
-              setFieldError
+              touched
             }) => (
               <Form onSubmit={handleSubmit}>
                 <div className={styles.title}>Hello!</div>
@@ -62,7 +57,7 @@ export default function Signup() {
                     className={styles.input}
                   />
                   <ErrorMessage name="first_name" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
+                    return <span className={styles.error}>{msg}</span>
                   }} />
                 </div>
                 <div>
@@ -79,7 +74,7 @@ export default function Signup() {
                     className={styles.input}
                   />
                   <ErrorMessage name="last_name" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
+                    return <span className={styles.error}>{msg}</span>
                   }} />
                 </div>
                 <Field
@@ -95,7 +90,7 @@ export default function Signup() {
                     className={styles.input}
                   />
                   <ErrorMessage name="email" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
+                    return <span className={styles.error}>{msg}</span>
                   }} />
                   <Field
                     id="password"
@@ -110,7 +105,7 @@ export default function Signup() {
                     className={styles.input}
                   />
                   <ErrorMessage name="password" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
+                    return <span className={styles.error}>{msg}</span>
                   }} />
                   <Field
                     id="confirm_password"
@@ -125,7 +120,7 @@ export default function Signup() {
                     className={styles.input}
                   />
                   <ErrorMessage name="confirm_password" render={(msg)=>{
-                    return <span style={{ color: '#f00'}}>{msg}</span>
+                    return <span className={styles.error}>{msg}</span>
                   }} />
                 <button type="submit" className={styles.signup}><Link to="/" className={styles.loginbtn}>Login</Link>
                   signup

@@ -45,7 +45,6 @@
     justify-content: center;
 }
 .loginbtn{
-    /* text-decoration: none; */
     font-weight: bold;
     color: rgb(56, 136, 168);
     margin-left: 5px;
@@ -56,8 +55,10 @@
     align-items: center;
 }
 .login{
-    /* text-decoration: none; */
     padding: 4px;
     font-weight: bold;
     color: rgb(56, 136, 168);
+}
+.error{
+    color: red;
 }

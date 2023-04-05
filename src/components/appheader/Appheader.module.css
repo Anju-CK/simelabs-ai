@@ -15,7 +15,11 @@
   font-size: 50px;
   font-style: oblique;
   padding: 30px;
-  flex: 8;
+  flex: 15;
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  color: white;
 }
 .container1 {
   flex: 1;
@@ -24,6 +28,14 @@
 }
 .navtext {
   margin-right: 30px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.navtext:hover,
+.navtext:focus,
+.navtext:active {
+  color: rgb(8, 56, 76);
 }
 .container2 {
   color: rgb(56, 136, 168);
@@ -36,4 +48,6 @@
   border-radius: 50%;
   border: none;
   margin-right: 30px;
+  font-size: 15px;
+  font-weight: bold;
 }

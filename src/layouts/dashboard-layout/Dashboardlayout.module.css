@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   background-color: rgb(214, 228, 234);
   width: 100%;
@@ -10,4 +12,6 @@
   padding: 125px;
   flex: 1;
   height: auto;
+  width: 100vh;
+  position: relative;
 }
