@@ -5,7 +5,8 @@ import arrowUp from "../../assets/arrow-up.svg";
 import Faceregister from "../fd-register";
 import Facerecognize from "../fd-recognize";
 
-export default function Dropdown() {
+export default function Dropdown(props: any) {
+  console.log(props);
   const [open, setOpen] = useState<boolean>(false);
   const handleToggle = () => {
     setOpen(!open);
@@ -16,22 +17,29 @@ export default function Dropdown() {
         className={`${styles.tab} ${open && styles.tabOpen}`}
         onClick={handleToggle}
       >
-        {/* <span>Register</span>
+        {props.options.map((option: string) => (
+          <div>{option}</div>
+        ))}
+        
+        {/* {props.options.map(
+          (optionsArray: string[]) => (
+            console.log("optionsArray:", optionsArray),
+            Array.isArray(optionsArray) &&
+              optionsArray.map(
+                (option: string) => (
+                  console.log("option:", option), (<div>{option}</div>)
+                )
+              )
+          )
+        )} */}
+
+        {/* {props.option.map((opt: string) => (
+          <div>{opt}</div>
+        ))} */}
+
         <img src={open ? arrowUp : arrowDown} alt="toggle" />
       </div>
-      {open && (
-        <div className={styles.contentContainer}>
-          <Faceregister/>
-        </div>
-      )} */}
-       <span>List</span>
-        <img src={open ? arrowUp : arrowDown} alt="toggle" />
-      </div>
-      {open && (
-        <div className={styles.contentContainer}>
-          <Facerecognize/>
-        </div>
-      )}
+      {open && <div className={styles.contentContainer}></div>}
     </div>
   );
 }

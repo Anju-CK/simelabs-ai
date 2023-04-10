@@ -1,14 +1,24 @@
+import { useState } from "react";
 import { capitalize } from "../../utils/capitalize";
 import { Subscriptionform } from "../subscription-form";
 import styles from "./Card.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Card(props: any) {
+  const navigate = useNavigate();
+  const [name, setName] = useState(props.name);
+  function handleClick() {
+    navigate({
+      pathname: "/detail",
+    });
+  }
+
   if (props.hit_limit <= 0) {
     return null;
   }
   return (
-    <div className={styles.container}>
-      <div className={styles.container1}>{capitalize(props.name)}</div>
+    <div className={styles.container} >
+      <div className={styles.container1} onClick={handleClick}>{capitalize(props.name)}</div>
       <div className={styles.box}>
         <div>
           <div className={styles.container2}>
