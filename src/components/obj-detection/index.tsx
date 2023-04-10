@@ -15,7 +15,7 @@ export default function Objectdetection() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={VALIDATION_SCHEMA}

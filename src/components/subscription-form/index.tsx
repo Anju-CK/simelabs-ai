@@ -132,7 +132,7 @@ export const Subscriptionform = ({
                       <ErrorMessage
                         name="hit_limit"
                         render={(msg) => {
-                          return <span style={{ color: "#f00" }}>{msg}</span>;
+                          return <span className={formStyles.error}>{msg}</span>;
                         }}
                       />
                     </div>

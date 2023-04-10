@@ -15,7 +15,7 @@ export default function Facerecognize() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={VALIDATION_SCHEMA}

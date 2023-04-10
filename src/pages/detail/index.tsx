@@ -11,6 +11,21 @@ export default function Detail() {
     undefined,
     true
   );
+  // const data: any={
+  // "Face Detection": [
+  //     "Recognize Face",
+  //     "View Registered Faces",
+  //     "Register Face"
+  // ],
+  // "Object Detection": [
+  //     "Detect safety gears(Mask, PP Kit, Googles, Helmet)"
+  // ],
+  // "FAQ": [
+  //     "FAQ Search",
+  //     "Extractive Search",
+  //     "Document Upload"
+  // ]
+  // }
   useEffect(() => {
     fetchData();
   }, []);
@@ -18,13 +33,9 @@ export default function Detail() {
     <div>
       <Dashboardlayout>
         <div className={styles.container}>
-            {data && Object.keys(data).map((keyName) => (
-              <Dropdown
-              key={keyName}
-              {...data[keyName]}
-              options={data[keyName]}
-              name={keyName}
-            />
+          {data &&
+            Object.keys(data).map((keyName) => (
+              <Dropdown key={keyName} options={data[keyName]} name={keyName} />
             ))}
         </div>
       </Dashboardlayout>
