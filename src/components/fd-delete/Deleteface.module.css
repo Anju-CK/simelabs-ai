@@ -1,0 +1,66 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .inputbox {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(94, 117, 136);
+    border: none;
+    box-shadow: rgb(4, 72, 132);
+    font-size: 20px;
+    padding: 8px;
+    margin-top: 5px;
+    
+  }
+  .inputbox::placeholder {
+    color: white;
+  }
+  .error {
+    color: red;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .button {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .btntxt {
+    padding: 12px;
+    border-radius: 5px;
+    width: 100px;
+    border: none;
+    color: rgb(35, 93, 116);
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .delete {
+    background-color: green;
+    color: white;
+  }
+  .cancel {
+    background-color: red;
+    color: white;
+  }
+  input[type="file"] {
+      width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(94, 117, 136);
+    border: none;
+    box-shadow: rgb(4, 72, 132);
+    color: white;
+    font-size: 20px;
+    padding: 8px;
+    margin-top: 5px;
+    }
+  
+  
