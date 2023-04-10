@@ -3,7 +3,7 @@ import styles from "./Dropdown.module.css";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowUp from "../../assets/arrow-up.svg";
 import Faceregister from "../fd-register";
-import Facerecognize from "../fd-recognize";
+import Facerecognize from "../fd-registered-faces";
 
 export default function Dropdown(props: any) {
   console.log(props);
