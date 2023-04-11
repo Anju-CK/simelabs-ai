@@ -30,7 +30,6 @@ export default function Documentupload() {
         }) => (
           <Form onSubmit={handleSubmit}>
             <div>
-                <label>Document</label>
               <Field
                 id="document"
                 type="file"
