@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     fetchData();
   }, []);
-  const updateData = (newData: any) => {
+  const updateData = () => {
     fetchData();
   };
 

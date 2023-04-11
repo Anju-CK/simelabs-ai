@@ -1,8 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import styles from "./Faceregister.module.css";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
-import useApi from "../../hooks/useApi";
-import { useState } from "react";
+import useApi from "../../../hooks/useApi";
 
 export default function Faceregister() {
   // const [showPopup, setShowPopup] = useState(false);

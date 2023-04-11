@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import useApi from '../../hooks/useApi';
 import styles from "./Deleteface.module.css";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from './schema';
+import useApi from '../../../hooks/useApi';
 
 export default function Deleteface() {
     const { data, error, fetchData } = useApi(

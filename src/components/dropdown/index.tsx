@@ -2,11 +2,11 @@ import { useState } from "react";
 import styles from "./Dropdown.module.css";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowUp from "../../assets/arrow-up.svg";
-import Faceregister from "../fd-register";
-import Registeredfaces from "../fd-registered-faces";
-import Facerecognize from "../fd-recognize";
 import Objectdetection from "../obj-detection";
 import { useLocation } from "react-router-dom";
+import Facerecognize from "../face-detection/fd-recognize";
+import Registeredfaces from "../face-detection/fd-registered-faces";
+import Faceregister from "../face-detection/fd-register";
 
 export default function Dropdown(props: any) {
   const [open, setOpen] = useState<number | null>(null);

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import useApi from "../../hooks/useApi";
+import { useEffect } from "react";
+import useApi from "../../../hooks/useApi";
 export default function Registeredfaces() {
   const { data, error, fetchData } = useApi(
     "/face_detection/registered_faces/",
@@ -9,7 +9,7 @@ export default function Registeredfaces() {
   );
   useEffect(() => {
     fetchData();
-    console.log(data)
+    console.log(data);
   }, []);
   return <div></div>;
 }
