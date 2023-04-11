@@ -2,11 +2,14 @@ import { useState } from "react";
 import styles from "./Dropdown.module.css";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowUp from "../../assets/arrow-up.svg";
-import Objectdetection from "../obj-detection";
+import Objectdetection from "../object-detection";
 import { useLocation } from "react-router-dom";
 import Facerecognize from "../face-detection/fd-recognize";
 import Registeredfaces from "../face-detection/fd-registered-faces";
 import Faceregister from "../face-detection/fd-register";
+import Faqsearch from "../faq/faq-search";
+import Extractivesearch from "../faq/extractive-search";
+import Documentupload from "../faq/document-upload";
 
 export default function Dropdown(props: any) {
   const [open, setOpen] = useState<number | null>(null);
@@ -66,7 +69,9 @@ export default function Dropdown(props: any) {
           {
             open === index && (
               <div className={styles.contentContainer}>
-                {/* {index === 0 && <Objectdetection />} */}
+                {index === 0 && <Faqsearch />}
+                {index === 1 && <Extractivesearch />}
+                {index === 2 && <Documentupload />}
               </div>
             )}
         </div>
