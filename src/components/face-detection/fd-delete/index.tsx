@@ -3,7 +3,7 @@ import { usePopper } from "react-popper";
 import { useContext, useRef, useState } from "react";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { UpdateContext } from "../../../context/updateContext";
-
+import formStyles from "./Deleteface.module.css";
 
 type Placement =
   | "auto"
@@ -27,11 +27,13 @@ export default function Deleteface({
   popupPlacement = "bottom-start",
   onSuccess,
   email,
+  name,
 }: {
   size?: "small" | "large";
   popupPlacement?: Placement;
   onSuccess?: (data: any) => void;
   email?: any;
+  name?: string;
 }) {
   const [referenceElement, setReferenceElement] =
     useState<HTMLButtonElement | null>(null);
@@ -41,7 +43,7 @@ export default function Deleteface({
   const [open, setOpen] = useState<boolean>(false);
   const popperWrapperRef = useRef(null);
   const popperBtnDivRef = useRef(null);
-  const context : any = useContext(UpdateContext);
+  const context: any = useContext(UpdateContext);
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: popupPlacement,
@@ -69,16 +71,19 @@ export default function Deleteface({
     false
   );
   const onSubmitHandler = () => {
-    // fetchData({email:email}),()=>{
-    //   typeof context.test === "function" && context.test();
-      fetchData({email:email} ,()=>{
-        typeof context.test === "function" && context.test();
-      });
+    fetchData({ email: email }, () => {
+      typeof context.test === "function" && context.test();
+    });
   };
   return (
     <>
       <div ref={popperBtnDivRef}>
-        <button type="button" ref={setReferenceElement} onClick={togglePopper}>
+        <button
+          type="button"
+          ref={setReferenceElement}
+          onClick={togglePopper}
+          className={formStyles.delete}
+        >
           Delete
         </button>
       </div>
@@ -89,11 +94,11 @@ export default function Deleteface({
             style={styles.popper}
             {...attributes.popper}
           >
-            <div ref={popperWrapperRef}>
-              <h3>Are you sure you want to delete?</h3>
-              <div>
-                <button onClick={onSubmitHandler}>Delete</button>
-                <button onClick={togglePopper}>Cancel</button>
+            <div ref={popperWrapperRef} className={formStyles.container}>
+              <h3>Are you sure you want to delete {name}?</h3>
+              <div className={formStyles.button}>
+                <button onClick={onSubmitHandler} className={formStyles.deletebtn}>Delete</button>
+                <button onClick={togglePopper} className={formStyles.cancelbtn}>Cancel</button>
               </div>
             </div>
           </div>

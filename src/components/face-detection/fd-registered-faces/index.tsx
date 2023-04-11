@@ -54,7 +54,7 @@ export default function Registeredfaces() {
                 <td>{item.designation}</td>
                 <td>{item.email}</td>
                 <td>
-                  <Deleteface email={item.email} />
+                  <Deleteface email={item.email} name={item.name}/>
                 </td>
               </tr>
             ))}
