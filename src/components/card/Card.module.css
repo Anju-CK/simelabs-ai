@@ -11,6 +11,7 @@
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
+  text-decoration: underline;
 }
 .container2{
   display: flex;

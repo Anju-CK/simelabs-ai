@@ -1,18 +1,11 @@
-import { useState } from "react";
 import { capitalize } from "../../utils/capitalize";
 import { Subscriptionform } from "../subscription-form";
 import styles from "./Card.module.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Card(props: any) {
-  const navigate = useNavigate();
-  const [name, setName] = useState(props.name);
-  function handleClick() {
-    navigate({
-      pathname: "/detail",
-    });
-  }
-
+  const handleClick = () => {
+    props.onClick();
+  };
   if (props.hit_limit <= 0) {
     return null;
   }
