@@ -32,20 +32,19 @@ export default function Objectdetection() {
           <Form onSubmit={handleSubmit}>
             <div className={styles.container}>
               <Field
-                id="images"
+                id="image"
                 type="file"
-                name="images"
-                values={values.images}
-                placeholder="Images"
-                error={errors.images && touched.images}
+                name="image"
+                values={values.image}
+                placeholder="Image"
+                error={errors.image && touched.image}
                 required
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
-                multiple
               />
               <ErrorMessage
-                name="images"
+                name="image"
                 render={(msg) => {
                   return <span className={styles.error}>{msg}</span>;
                 }}
