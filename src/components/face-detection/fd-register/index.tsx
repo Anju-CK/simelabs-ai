@@ -1,25 +1,37 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import styles from "./Faceregister.module.css";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
-import useApi from "../../../hooks/useApi";
+import useFetch from "../../../hooks/useFetch";
+
+interface FormValues {
+  face_name: string;
+  face_designation: string;
+  face_email: string;
+  images?: File | null;
+}
 
 export default function Faceregister() {
-  // const [showPopup, setShowPopup] = useState(false);
-
-  const { data, error, fetchData } = useApi(
+  const { data, error, fetchData } = useFetch(
     "/face_detection/register/",
     "POST",
     undefined,
     false
   );
-  const onSubmitHandler = (values: any) => {
-    fetchData();
+
+  const onSubmitHandler = (values: FormValues) => {
+    const { images } = values;
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(values)) {
+      if (key === "images") {
+        formData.append("images", images as File);
+      } else {
+        formData.append(key, value);
+      }
+    }
+    fetchData(formData);
+    console.log("data:", data);
   };
 
-  // if (data !== null) {
-  //   console.log(data)
-  //   setShowPopup(true);
-  // }
   return (
     <div className={styles.container}>
       <Formik
@@ -34,6 +46,7 @@ export default function Faceregister() {
           values,
           errors,
           touched,
+          setFieldValue,
         }) => (
           <Form onSubmit={handleSubmit}>
             <div>
@@ -77,15 +90,17 @@ export default function Faceregister() {
               />
             </div>
             <div>
-              <Field
+              <input
                 id="images"
                 type="file"
                 name="images"
-                values={values.images}
                 placeholder="Images"
-                error={errors.images && touched.images}
                 required
-                onChange={handleChange}
+                onChange={(event: any) => {
+                  console.log("event:", event.currentTarget.files?.[0] || null);
+                  const file = event.currentTarget.files?.[0] || null;
+                  setFieldValue("images", file);
+                }}
                 onBlur={handleBlur}
                 className={styles.inputbox}
                 multiple
