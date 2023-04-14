@@ -1,19 +1,23 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
-import styles from "./Facerecognize.module.css"
-import useApi from "../../../hooks/useApi";
+import styles from "./Facerecognize.module.css";
+import useFetch from "../../../hooks/useFetch";
 
 export default function Facerecognize() {
-  const { data, error, fetchData } = useApi(
+  const { data, error, fetchData } = useFetch(
     "/face_detection/recognize/",
     "POST",
     undefined,
     false
   );
-  const onSubmitHandler = (values: any) => {
-    fetchData();
-  };
 
+  const onSubmitHandler = (values: any) => {
+    const { image } = values;
+    const formData = new FormData();
+    formData.append("image", image as File);
+    fetchData(formData);
+  };
+  console.log("data:", data);
   return (
     <div className={styles.container}>
       <Formik
@@ -21,31 +25,25 @@ export default function Facerecognize() {
         validationSchema={VALIDATION_SCHEMA}
         onSubmit={onSubmitHandler}
       >
-        {({
-          handleSubmit,
-          handleBlur,
-          handleChange,
-          values,
-          errors,
-          touched,
-        }) => (
+        {({ handleSubmit, handleBlur, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
             <div className={styles.container}>
-              <Field
-                id="images"
+              <input
+                id="image"
                 type="file"
-                name="images"
-                values={values.images}
-                placeholder="Images"
-                error={errors.images && touched.images}
+                name="image"
+                placeholder="Image"
                 required
-                onChange={handleChange}
+                onChange={(event: any) => {
+                  console.log("event:", event.currentTarget.files?.[0] || null);
+                  const file = event.currentTarget.files?.[0] || null;
+                  setFieldValue("image", file);
+                }}
                 onBlur={handleBlur}
                 className={styles.inputbox}
-                multiple
               />
               <ErrorMessage
-                name="images"
+                name="image"
                 render={(msg) => {
                   return <span className={styles.error}>{msg}</span>;
                 }}
