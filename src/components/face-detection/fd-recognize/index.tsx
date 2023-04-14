@@ -59,6 +59,13 @@ export default function Facerecognize() {
               <button
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
+                onClick={() => {
+                  const input = document.getElementById("image") as HTMLInputElement;
+                  if (input) {
+                    input.value = "";
+                    setFieldValue("image", null); 
+                  }
+                }}
               >
                 Cancel
               </button>

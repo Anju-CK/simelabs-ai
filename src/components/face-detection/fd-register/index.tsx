@@ -29,8 +29,8 @@ export default function Faceregister() {
       }
     }
     fetchData(formData);
-    console.log("data:", data);
   };
+  console.log("data:", data);
 
   return (
     <div className={styles.container}>
@@ -142,6 +142,13 @@ export default function Faceregister() {
               <button
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
+                onClick={() => {
+                  const input = document.getElementById("images") as HTMLInputElement;
+                  if (input) {
+                    input.value = "";
+                    setFieldValue("images", null); 
+                  }
+                }}
               >
                 Cancel
               </button>
