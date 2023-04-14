@@ -1,18 +1,35 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import useApi from "../../../hooks/useApi";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import styles from "./Documentupload.module.css";
+import useFetch from "../../../hooks/useFetch";
+
+interface FormValues {
+  document?: File | null;
+  doc_type: string;
+  FAQ_generate: string;
+  meta_filters: string;
+}
 
 export default function Documentupload() {
-  const { data, error, fetchData } = useApi(
+  const { data, error, fetchData } = useFetch(
     "/oxylym_faq/document_upload/",
     "POST",
     undefined,
     false
   );
-  const onSubmitHandler = (values: any) => {
-    fetchData();
+  const onSubmitHandler = (values: FormValues) => {
+    const { document } = values;
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(values)) {
+      if (key === "document") {
+        formData.append("document", document as File);
+      } else {
+        formData.append(key, value);
+      }
+    }
+    fetchData(formData);
   };
+  console.log("data:", data);
   return (
     <div className={styles.container}>
       <Formik
@@ -27,18 +44,21 @@ export default function Documentupload() {
           values,
           errors,
           touched,
+          setFieldValue,
         }) => (
           <Form onSubmit={handleSubmit}>
             <div>
-              <Field
+              <input
                 id="document"
                 type="file"
                 name="document"
-                values={values.document}
                 placeholder="Document"
-                error={errors.document && touched.document}
                 required
-                onChange={handleChange}
+                onChange={(event: any) => {
+                  console.log("event:", event.currentTarget.files?.[0] || null);
+                  const file = event.currentTarget.files?.[0] || null;
+                  setFieldValue("document", file);
+                }}
                 onBlur={handleBlur}
                 className={styles.inputbox}
                 multiple
@@ -74,20 +94,24 @@ export default function Documentupload() {
                 }}
               />
             </div>
-            {values.doc_type !== "FAQ" && (
+            {values.doc_type == "Other" && (
               <div>
                 <Field
                   id="FAQ_generate"
-                  type="text"
+                  as="select"
                   name="FAQ_generate"
                   values={values.FAQ_generate}
-                  placeholder="FAQ generate"
                   error={errors.FAQ_generate && touched.FAQ_generate}
+                  required
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={styles.inputbox}
-                  hidden={values.doc_type === "" ? true : false}
-                />
+                  className={styles.selectbox}
+                >
+                  <option value="">Select Generate Status</option>
+                  <option value="True">True</option>
+                  <option value="False">False</option>
+                </Field>
+
                 <ErrorMessage
                   name="FAQ_generate"
                   render={(msg) => {
@@ -126,6 +150,13 @@ export default function Documentupload() {
               <button
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
+                onClick={() => {
+                  const input = document.getElementById("document") as HTMLInputElement;
+                  if (input) {
+                    input.value = "";
+                    setFieldValue("document", null); 
+                  }
+                }}
               >
                 Cancel
               </button>
