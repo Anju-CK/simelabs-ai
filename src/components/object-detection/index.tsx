@@ -16,8 +16,8 @@ export default function Objectdetection() {
     const formData = new FormData();
     formData.append("image", image as File);
     fetchData(formData);
-    console.log("data:", data);
   };
+  console.log("data:", data);
 
   return (
     <div className={styles.container}>
