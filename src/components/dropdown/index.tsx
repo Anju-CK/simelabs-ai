@@ -69,9 +69,9 @@ export default function Dropdown(props: any) {
           {
             open === index && (
               <div className={styles.contentContainer}>
-                {index === 0 && <Faqsearch />}
-                {index === 1 && <Extractivesearch />}
-                {index === 2 && <Documentupload />}
+                {index === 0 && <Documentupload />}
+                {index === 1 && <Faqsearch />}
+                {index === 2 && <Extractivesearch />}
               </div>
             )}
         </div>
