@@ -3,6 +3,7 @@ import { Cancel } from "../cancel";
 import { Demo } from "../demo";
 import { Subscriptionform } from "../subscription-form";
 import styles from "./Card.module.css";
+import subscribe from "../../assets/subscribed.webp";
 
 export default function Card(props: any) {
   const handleClick = () => {
@@ -21,10 +22,12 @@ export default function Card(props: any) {
         </div>
       ) : (
         <>
-          <div className={styles.container1} onClick={handleClick}>
-            {capitalize(props.name)}
+          <div className={styles.box}>
+            <div className={styles.container1} onClick={handleClick}>
+              {capitalize(props.name)}
+            </div>
+            <img src={subscribe} style={{ width: "30px", height: "30px" }} />
           </div>
-
           <div className={styles.box}>
             <div>
               <div className={styles.container2}>
