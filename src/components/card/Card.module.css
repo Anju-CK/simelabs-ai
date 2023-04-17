@@ -28,19 +28,7 @@
   width: 100%;
   justify-content: space-between;
 }
-.cancel {
-  background-color: red;
-  border: none;
-  border-radius: 5px;
-  height: 40px;
-  width: 100px;
-  color: white;
-  font-size: large;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
+
 .container3 {
   font-size: larger;
   font-weight: bold;

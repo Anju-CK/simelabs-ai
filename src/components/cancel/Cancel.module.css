@@ -1,0 +1,56 @@
+.cancel {
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+  color: white;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.container {
+  width: 280px;
+  padding: 20px;
+  background-color: rgb(27, 26, 26);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  margin-top: 5px;
+  box-shadow: 0px 1px 18px 1px rgb(195, 173, 173);
+  color: white;
+}
+.btn {
+  display: flex;
+}
+.yesbtn {
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+  color: white;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.nobtn {
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+  color: white;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 10px;
+}

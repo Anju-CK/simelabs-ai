@@ -1,4 +1,5 @@
 import { capitalize } from "../../utils/capitalize";
+import { Cancel } from "../cancel";
 import { Demo } from "../demo";
 import { Subscriptionform } from "../subscription-form";
 import styles from "./Card.module.css";
@@ -7,10 +8,6 @@ export default function Card(props: any) {
   const handleClick = () => {
     props.onClick();
   };
-
-  // if (props.hit_limit <= 0) {
-  // return null;
-  // }
   return (
     <div className={styles.container}>
       {props.subscribed == 0 && props.hit_limit == 0 ? (
@@ -45,7 +42,9 @@ export default function Card(props: any) {
               </div>
             </div>
 
-            <div className={styles.cancel}>Cancel</div>
+            <div className={styles.cancel}>
+              <Cancel model_url={props.model_url} />
+            </div>
           </div>
         </>
       )}
