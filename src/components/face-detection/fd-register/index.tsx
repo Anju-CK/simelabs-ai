@@ -2,6 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import styles from "./Faceregister.module.css";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import useFetch from "../../../hooks/useFetch";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface FormValues {
   face_name: string;
@@ -28,9 +30,22 @@ export default function Faceregister() {
         formData.append(key, value);
       }
     }
-    fetchData(formData);
+    fetchData(
+      formData,
+      () => {
+        toast.success("Registration Successful!", {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 1000,
+        });
+      },
+      () => {
+        toast.error("Email already exist", {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 1000,
+        });
+      }
+    );
   };
-  console.log("data:", data);
 
   return (
     <div className={styles.container}>
@@ -143,10 +158,12 @@ export default function Faceregister() {
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
                 onClick={() => {
-                  const input = document.getElementById("images") as HTMLInputElement;
+                  const input = document.getElementById(
+                    "images"
+                  ) as HTMLInputElement;
                   if (input) {
                     input.value = "";
-                    setFieldValue("images", null); 
+                    setFieldValue("images", null);
                   }
                 }}
               >
