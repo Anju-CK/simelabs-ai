@@ -34,8 +34,8 @@ export default function Dropdown(props: any) {
             open === index && (
               <div className={styles.contentContainer}>
                 {index === 0 && <Facerecognize />}
-                {index === 1 && <Faceregister />}
-                {index === 2 && <Registeredfaces />}
+                {index === 1 && <Registeredfaces />}
+                {index === 2 && <Faceregister />}
               </div>
             )}
         </div>
@@ -69,8 +69,8 @@ export default function Dropdown(props: any) {
           {
             open === index && (
               <div className={styles.contentContainer}>
-                {index === 0 && <Documentupload />}
-                {index === 1 && <Extractivesearch />}
+                {index === 0 && <Extractivesearch />}
+                {index === 1 && <Documentupload />}
                 {index === 2 && <Faqsearch />}
               </div>
             )}
