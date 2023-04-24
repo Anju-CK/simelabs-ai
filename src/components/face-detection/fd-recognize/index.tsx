@@ -2,8 +2,11 @@ import { ErrorMessage, Form, Formik } from "formik";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import styles from "./Facerecognize.module.css";
 import useFetch from "../../../hooks/useFetch";
+import { useState } from "react";
+import Modalcomponent from "../../modalcomponent";
 
 export default function Facerecognize() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, error, fetchData } = useFetch(
     "/face_detection/recognize/",
     "POST",
@@ -17,7 +20,7 @@ export default function Facerecognize() {
     formData.append("image", image as File);
     fetchData(formData);
   };
-  console.log("data:", data);
+
   return (
     <div className={styles.container}>
       <Formik
@@ -54,6 +57,9 @@ export default function Facerecognize() {
               <button
                 type="submit"
                 className={styles.btntxt + " " + styles.recognize}
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
               >
                 Recognize
               </button>
@@ -76,6 +82,23 @@ export default function Facerecognize() {
           </Form>
         )}
       </Formik>
+      <Modalcomponent
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        {data && data.name ? (
+          <div className={styles.modalbox}>
+            <div>{data.name} !</div>
+            <div>You are an {data.designation} isn't it</div>
+          </div>
+        ) : null}
+        {data && data.message ? (
+          <div className={styles.modalbox}>
+            <div>oops!</div>
+            <div>{data.message}</div>
+          </div>
+        ) : null}
+      </Modalcomponent>
     </div>
   );
 }

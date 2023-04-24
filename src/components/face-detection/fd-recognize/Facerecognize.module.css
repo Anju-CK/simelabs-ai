@@ -64,3 +64,8 @@ input[type="file"] {
   padding: 8px;
   margin-top: 5px;
 }
+.modalbox {
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+}
