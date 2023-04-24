@@ -10,10 +10,10 @@ const links: Record<string, any> = [
     displayName: "Home",
     link: "/home",
   },
-  {
-    displayName: "Detail",
-    link: "/detail",
-  },
+  // {
+  //   displayName: "Detail",
+  //   link: "/detail",
+  // },
 ];
 export default function Appheader() {
   const [token, setToken] = useState<string | undefined>(Cookies.get("token"));
