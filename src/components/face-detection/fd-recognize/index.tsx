@@ -28,6 +28,7 @@ export default function Facerecognize() {
         {({ handleSubmit, handleBlur, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
             <div className={styles.container}>
+              <label className={styles.image}>Face Image</label>
               <input
                 id="image"
                 type="file"
@@ -60,10 +61,12 @@ export default function Facerecognize() {
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
                 onClick={() => {
-                  const input = document.getElementById("image") as HTMLInputElement;
+                  const input = document.getElementById(
+                    "image"
+                  ) as HTMLInputElement;
                   if (input) {
                     input.value = "";
-                    setFieldValue("image", null); 
+                    setFieldValue("image", null);
                   }
                 }}
               >
