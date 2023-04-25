@@ -2,6 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import styles from "./Documentupload.module.css";
 import useFetch from "../../../hooks/useFetch";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 interface FormValues {
   document?: File | null;
@@ -27,7 +30,19 @@ export default function Documentupload() {
         formData.append(key, value);
       }
     }
-    fetchData(formData);
+    fetchData(formData,
+      () => {
+      toast.success("Uploading Successful!", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1000,
+      });
+    },
+    () => {
+      toast.error("Something went wrong", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1000,
+      });
+    });
   };
   console.log("data:", data);
   return (
