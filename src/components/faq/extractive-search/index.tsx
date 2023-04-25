@@ -2,8 +2,12 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import styles from "./Extractivesearch.module.css"
 import useApi from "../../../hooks/useApi";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
+import { useState } from "react";
+import Modalcomponent from "../../modalcomponent";
 
 export default function Extractivesearch() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const { data, error, fetchData } = useApi(
     "/oxylym_faq/extractive_search/",
@@ -58,7 +62,6 @@ export default function Extractivesearch() {
                 name="filters.filter1"
                 values={values.filters.filter1}
                 placeholder="Filter1"
-                // error={errors.(filters.filter1 )&& touched.(filters.filter1)}
                 required
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -78,7 +81,6 @@ export default function Extractivesearch() {
                 name="filters.filter2"
                 values={values.filters.filter2}
                 placeholder="Filter2"
-                // error={errors.(filters.filter2 )&& touched.(filters.filter2)}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
@@ -97,7 +99,6 @@ export default function Extractivesearch() {
                 name="filters.filter3"
                 values={values.filters.filter3}
                 placeholder="Filter3"
-                // error={errors.(filters.filter3 )&& touched.(filters.filter3)}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
@@ -116,7 +117,6 @@ export default function Extractivesearch() {
                 name="filters.filter4"
                 values={values.filters.filter4}
                 placeholder="Filter4"
-                // error={errors.(filters?.filter4)&& touched.(filters.filter4)}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
@@ -132,6 +132,9 @@ export default function Extractivesearch() {
               <button
                 type="submit"
                 className={styles.btntxt + " " + styles.search}
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
               >
                 Search
               </button>
@@ -145,6 +148,17 @@ export default function Extractivesearch() {
           </Form>
         )}
       </Formik>
+      <Modalcomponent
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        {data &&
+        data.response ? (
+          <div className={styles.modalbox}>
+            <div>{data.response}</div>
+          </div>
+        ) : null}
+      </Modalcomponent>
     </div>
   );
 }
