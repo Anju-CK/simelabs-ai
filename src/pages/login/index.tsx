@@ -6,6 +6,7 @@ import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import useApi from "../../hooks/useApi";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 export default function Login() {
   const [loginError, setLoginError] = useState<string | undefined>(undefined);
@@ -17,6 +18,11 @@ export default function Login() {
     undefined,
     true
   );
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmitHandler = (values: any, { setErrors }: any) => {
     fetchData(
@@ -72,22 +78,29 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <Field
-                    id="password"
-                    type="password"
-                    name="password"
-                    values={values.password}
-                    placeholder="Password"
-                    error={errors.password && touched.password}
-                    required
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={styles.input}
-                  />
+                  <div className={styles.inputbox}>
+                    <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={styles.input}
+                      placeholder="Password"
+                      required
+                    />
+                    <span
+                      onClick={togglePasswordVisibility}
+                      className={styles.iconposition}
+                    >
+                      {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                    </span>
+                  </div>
                   <ErrorMessage
                     name="password"
                     render={(msg) => {
-                      return <span className={styles.errormsg}>{msg}</span>;
+                      return <span className={styles.error}>{msg}</span>;
                     }}
                   />
                 </div>
