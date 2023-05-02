@@ -3,7 +3,7 @@ import styles from "./Signup.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import useApi from "../../hooks/useApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const { data, error, fetchData } = useApi(
@@ -12,17 +12,13 @@ export default function Signup() {
     undefined,
     true
   );
-  const onSubmitHandler = async (values: any, { setSubmitting, setErrors }: any) => {
-   
-      let res  = await fetchData(values, ( res )=>{
-        setSubmitting( false );
-        
-      });
-     
+
+  const navigate = useNavigate();
+  const onSubmitHandler = (values: any) => {
+    fetchData(values, () => {
+      navigate("/");
+    });
   };
-  console.log(error)
-
-
 
   return (
     <OnboardingLayout>
@@ -39,7 +35,7 @@ export default function Signup() {
               handleChange,
               values,
               errors,
-              touched
+              touched,
             }) => (
               <Form onSubmit={handleSubmit}>
                 <div className={styles.title}>Hello!</div>
@@ -56,9 +52,12 @@ export default function Signup() {
                     onBlur={handleBlur}
                     className={styles.input}
                   />
-                  <ErrorMessage name="first_name" render={(msg)=>{
-                    return <span className={styles.error}>{msg}</span>
-                  }} />
+                  <ErrorMessage
+                    name="first_name"
+                    render={(msg) => {
+                      return <span className={styles.error}>{msg}</span>;
+                    }}
+                  />
                 </div>
                 <div>
                   <Field
@@ -73,59 +72,76 @@ export default function Signup() {
                     onBlur={handleBlur}
                     className={styles.input}
                   />
-                  <ErrorMessage name="last_name" render={(msg)=>{
-                    return <span className={styles.error}>{msg}</span>
-                  }} />
+                  <ErrorMessage
+                    name="last_name"
+                    render={(msg) => {
+                      return <span className={styles.error}>{msg}</span>;
+                    }}
+                  />
                 </div>
                 <Field
-                    id="email"
-                    type="email"
-                    name="email"
-                    values={values.email}
-                    placeholder="Email"
-                    error={errors.email && touched.email}
-                    required
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={styles.input}
-                  />
-                  <ErrorMessage name="email" render={(msg)=>{
-                    return <span className={styles.error}>{msg}</span>
-                  }} />
-                  <Field
-                    id="password"
-                    type="password"
-                    name="password"
-                    values={values.password}
-                    placeholder="Password"
-                    error={errors.password && touched.password}
-                    required
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={styles.input}
-                  />
-                  <ErrorMessage name="password" render={(msg)=>{
-                    return <span className={styles.error}>{msg}</span>
-                  }} />
-                  <Field
-                    id="confirm_password"
-                    type="confirm_password"
-                    name="confirm_password"
-                    values={values.confirm_password}
-                    placeholder="Confirm Password"
-                    error={errors.confirm_password && touched.confirm_password}
-                    required
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={styles.input}
-                  />
-                  <ErrorMessage name="confirm_password" render={(msg)=>{
-                    return <span className={styles.error}>{msg}</span>
-                  }} />
-                <button type="submit" className={styles.signup}><Link to="/" className={styles.loginbtn}>Login</Link>
+                  id="email"
+                  type="email"
+                  name="email"
+                  values={values.email}
+                  placeholder="Email"
+                  error={errors.email && touched.email}
+                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={styles.input}
+                />
+                <ErrorMessage
+                  name="email"
+                  render={(msg) => {
+                    return <span className={styles.error}>{msg}</span>;
+                  }}
+                />
+                <Field
+                  id="password"
+                  type="password"
+                  name="password"
+                  values={values.password}
+                  placeholder="Password"
+                  error={errors.password && touched.password}
+                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={styles.input}
+                />
+                <ErrorMessage
+                  name="password"
+                  render={(msg) => {
+                    return <span className={styles.error}>{msg}</span>;
+                  }}
+                />
+                <Field
+                  id="confirm_password"
+                  type="confirm_password"
+                  name="confirm_password"
+                  values={values.confirm_password}
+                  placeholder="Confirm Password"
+                  error={errors.confirm_password && touched.confirm_password}
+                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={styles.input}
+                />
+                <ErrorMessage
+                  name="confirm_password"
+                  render={(msg) => {
+                    return <span className={styles.error}>{msg}</span>;
+                  }}
+                />
+                <button type="submit" className={styles.signup}>
                   signup
                 </button>
-                <div  className={styles.return}>Back to <Link to="/" className={styles.login}> Login</Link>
+                <div className={styles.return}>
+                  Back to{" "}
+                  <Link to="/" className={styles.login}>
+                    {" "}
+                    Login
+                  </Link>
                 </div>
               </Form>
             )}
@@ -135,4 +151,3 @@ export default function Signup() {
     </OnboardingLayout>
   );
 }
-
