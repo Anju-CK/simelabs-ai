@@ -4,6 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import useApi from "../../hooks/useApi";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 export default function Signup() {
   const { data, error, fetchData } = useApi(
@@ -12,6 +14,15 @@ export default function Signup() {
     undefined,
     true
   );
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmpassword, setShowconfirmpassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowconfirmpassword(!showConfirmpassword);
+  };
 
   const navigate = useNavigate();
   const onSubmitHandler = (values: any) => {
@@ -79,60 +90,82 @@ export default function Signup() {
                     }}
                   />
                 </div>
-                <Field
-                  id="email"
-                  type="email"
-                  name="email"
-                  values={values.email}
-                  placeholder="Email"
-                  error={errors.email && touched.email}
-                  required
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="email"
-                  render={(msg) => {
-                    return <span className={styles.error}>{msg}</span>;
-                  }}
-                />
-                <Field
-                  id="password"
-                  type="password"
-                  name="password"
-                  values={values.password}
-                  placeholder="Password"
-                  error={errors.password && touched.password}
-                  required
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="password"
-                  render={(msg) => {
-                    return <span className={styles.error}>{msg}</span>;
-                  }}
-                />
-                <Field
-                  id="confirm_password"
-                  type="confirm_password"
-                  name="confirm_password"
-                  values={values.confirm_password}
-                  placeholder="Confirm Password"
-                  error={errors.confirm_password && touched.confirm_password}
-                  required
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="confirm_password"
-                  render={(msg) => {
-                    return <span className={styles.error}>{msg}</span>;
-                  }}
-                />
+                <div>
+                  <Field
+                    id="email"
+                    type="email"
+                    name="email"
+                    values={values.email}
+                    placeholder="Email"
+                    error={errors.email && touched.email}
+                    required
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.input}
+                  />
+                  <ErrorMessage
+                    name="email"
+                    render={(msg) => {
+                      return <span className={styles.error}>{msg}</span>;
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <div className={styles.inputbox}>
+                    <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={styles.input}
+                      placeholder="Password"
+                      required
+                    />
+                    <span
+                      onClick={togglePasswordVisibility}
+                      className={styles.iconposition}
+                    >
+                      {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                    </span>
+                  </div>
+                  <ErrorMessage
+                    name="password"
+                    render={(msg) => {
+                      return <span className={styles.error}>{msg}</span>;
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <div className={styles.inputbox}>
+                    <input
+                      id="confirm_password"
+                      type={showConfirmpassword ? "text" : "password"}
+                      name="confirm_password"
+                      value={values.confirm_password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={styles.input}
+                      placeholder="Confirm Password"
+                      required
+                    />
+                    <span
+                      onClick={toggleConfirmPasswordVisibility}
+                      className={styles.iconposition}
+                    >
+                      {showConfirmpassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                    </span>
+                  </div>
+                  <ErrorMessage
+                    name="confirm_password"
+                    render={(msg) => {
+                      return <span className={styles.error}>{msg}</span>;
+                    }}
+                  />
+                </div>
                 <button type="submit" className={styles.signup}>
                   signup
                 </button>
