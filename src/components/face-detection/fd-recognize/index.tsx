@@ -88,8 +88,8 @@ export default function Facerecognize() {
       >
         {data && data.name ? (
           <div className={styles.modalbox}>
-            <div>{data.name} !</div>
-            <div>You are an {data.designation} isn't it</div>
+            <div>Name : {data.name}</div>
+            <div>Designation :{data.designation}</div>
           </div>
         ) : null}
         {data && data.message ? (
