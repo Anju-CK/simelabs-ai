@@ -33,9 +33,9 @@ export default function Dropdown(props: any) {
           {
             open === index && (
               <div className={styles.contentContainer}>
-                {index === 0 && <Faceregister />}
-                {index === 1 && <Registeredfaces />}
-                {index === 2 && <Facerecognize />}
+                {index === 0 && <Registeredfaces />}
+                {index === 1 &&<Facerecognize />}
+                {index === 2 && <Faceregister />}
               </div>
             )}
         </div>

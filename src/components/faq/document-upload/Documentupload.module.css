@@ -6,7 +6,7 @@
 }
 .inputbox {
   width: 100%;
-  height: 35px;
+  height: 48px;
   border-radius: 5px;
   background-color: rgb(94, 117, 136);
   border: none;
@@ -19,7 +19,7 @@
   color: white;
 }
 .selectbox {
-  width: 104%;
+  width: 100%;
   height: 50px;
   border-radius: 5px;
   background-color: rgb(94, 117, 136);
@@ -62,7 +62,7 @@
 }
 input[type="file"] {
   width: 100%;
-  height: 35px;
+  height: 48px;
   border-radius: 5px;
   background-color: rgb(94, 117, 136);
   border: none;
