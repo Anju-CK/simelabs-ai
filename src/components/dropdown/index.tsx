@@ -21,61 +21,67 @@ export default function Dropdown(props: any) {
   const id = location.state?.index || 0;
   return (
     <div>
-      {id===1 && props.name.replace(/\s/g, "").toLowerCase() === "facedetection" && props.options.map((info: string, index: number) => (
-        <div className={styles.container} key={index}>
-          <div
-            className={`${styles.tab} ${open === index && styles.tabOpen}`}
-            onClick={() => handleToggle(index)}
-          >
-            {info}
-            <img src={open === index ? arrowUp : arrowDown} alt="toggle" />
-          </div>
-          {
-            open === index && (
+      {id === 1 &&
+        props.name.replace(/\s/g, "").toLowerCase() === "facedetection" &&
+        props.options.map((info: string, index: number) => (
+          <div className={styles.container} key={index}>
+            <div
+              className={`${styles.tab} ${open === index && styles.tabOpen}`}
+              onClick={() => handleToggle(index)}
+            >
+              {info}
+              <img src={open === index ? arrowUp : arrowDown} alt="toggle" />
+            </div>
+            {open === index && (
               <div className={styles.contentContainer}>
-                {index === 0 && <Registeredfaces />}
-                {index === 1 &&<Facerecognize />}
-                {index === 2 && <Faceregister />}
+                {info === "View Registered Faces" && <Registeredfaces />}
+                {info === "Recognize Face" && <Facerecognize />}
+                {info === "Register Face" && <Faceregister />}
               </div>
             )}
-        </div>
-      ))}
-      {id===0 && props.name.replace(/\s/g, "").toLowerCase() === "objectdetection" && props.options.map((info: string, index: number) => (
-        <div className={styles.container} key={index}>
-          <div
-            className={`${styles.tab} ${open === index && styles.tabOpen}`}
-            onClick={() => handleToggle(index)}
-          >
-            {info}
-            <img src={open === index ? arrowUp : arrowDown} alt="toggle" />
           </div>
-          {
-            open === index && (
+        ))}
+      {id === 0 &&
+        props.name.replace(/\s/g, "").toLowerCase() === "objectdetection" &&
+        props.options.map((info: string, index: number) => (
+          <div className={styles.container} key={index}>
+            <div
+              className={`${styles.tab} ${open === index && styles.tabOpen}`}
+              onClick={() => handleToggle(index)}
+            >
+              {info}
+              <img src={open === index ? arrowUp : arrowDown} alt="toggle" />
+            </div>
+            {open === index && (
               <div className={styles.contentContainer}>
-                {index === 0 && <Objectdetection />}
+                {info ===
+                  "Detect safety gears(Mask, PP Kit, Googles, Helmet)" && (
+                  <Objectdetection />
+                )}
               </div>
             )}
-        </div>
-      ))}
-       {id===2 && props.name.replace(/\s/g, "").toLowerCase() === "faq" && props.options.map((info: string, index: number) => (
-        <div className={styles.container} key={index}>
-          <div
-            className={`${styles.tab} ${open === index && styles.tabOpen}`}
-            onClick={() => handleToggle(index)}
-          >
-            {info}
-            <img src={open === index ? arrowUp : arrowDown} alt="toggle" />
           </div>
-          {
-            open === index && (
+        ))}
+      {id === 2 &&
+        props.name.replace(/\s/g, "").toLowerCase() === "faq" &&
+        props.options.map((info: string, index: number) => (
+          <div className={styles.container} key={index}>
+            <div
+              className={`${styles.tab} ${open === index && styles.tabOpen}`}
+              onClick={() => handleToggle(index)}
+            >
+              {info}
+              <img src={open === index ? arrowUp : arrowDown} alt="toggle" />
+            </div>
+            {open === index && (
               <div className={styles.contentContainer}>
-                {index === 0 && <Extractivesearch />}
-                {index === 1 && <Faqsearch />}
-                {index === 2 && <Documentupload />}
+                {info === "Extractive Search" && <Extractivesearch />}
+                {info === "FAQ Search" && <Faqsearch />}
+                {info === "Document Upload" && <Documentupload />}
               </div>
             )}
-        </div>
-      ))}
+          </div>
+        ))}
     </div>
   );
 }
