@@ -4,6 +4,7 @@ import { Demo } from "../demo";
 import { Subscriptionform } from "../subscription-form";
 import styles from "./Card.module.css";
 import subscribe from "../../assets/subscribed.webp";
+import CardDetails from "./carddetails";
 
 export default function Card(props: any) {
   const handleClick = () => {
@@ -17,57 +18,24 @@ export default function Card(props: any) {
             <div className={styles.container1} onClick={handleClick}>
               {capitalize(props.name)}
             </div>
-            <img src={subscribe} style={{ width: "30px", height: "30px" }} title="Subscribed" />
+            <img
+              src={subscribe}
+              style={{ width: "30px", height: "30px" }}
+              title="Subscribed"
+            />
           </div>
           <div className={styles.box}>
-            <div>
-              <div className={styles.container2}>
-                <div className={styles.text}>Hit Limit</div>
-                <div className={styles.text}>Current Usage</div>
-                <div className={styles.text}>Start Date</div>
-                <div className={styles.text}>Expiry</div>
-              </div>
-
-              <div className={styles.container2}>
-                <div className={styles.text}>{props.hit_limit}</div>
-                <div className={styles.text}>{props.current_usage}</div>
-                <div className={styles.text}>{props.start_date}</div>
-                <div className={styles.text}>{props.expiry}</div>
-              </div>
-            </div>
-
+            <CardDetails data={props} />
             <div className={styles.cancel}>
               <Cancel model_url={props.model_url} />
             </div>
           </div>
         </>
-      ) : props.subscribed == 0 && props.hit_limit != 0 ? (
-        <>
-          <div className={styles.box}>
-            <div className={styles.container1} onClick={handleClick}>
-              {capitalize(props.name)}
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div>
-              <div className={styles.container2}>
-                <div className={styles.text}>Hit Limit</div>
-                <div className={styles.text}>Current Usage</div>
-                <div className={styles.text}>Start Date</div>
-                <div className={styles.text}>Expiry</div>
-              </div>
-
-              <div className={styles.container2}>
-                <div className={styles.text}>{props.hit_limit}</div>
-                <div className={styles.text}>{props.current_usage}</div>
-                <div className={styles.text}>{props.start_date}</div>
-                <div className={styles.text}>{props.expiry}</div>
-              </div>
-            </div>
-            <Subscriptionform model_url={props.model_url} />
-          </div>
-        </>
-      ) : (
+      ) : props.subscribed == 0 &&
+        props["is demo "] == 0 &&
+        props["demo used "] == 0 &&
+        props.hit_limit == 0 &&
+        props.current_usage == 0 ? (
         <div>
           <div className={styles.container3}>{capitalize(props.name)}</div>
 
@@ -76,7 +44,59 @@ export default function Card(props: any) {
             <Subscriptionform model_url={props.model_url} />
           </div>
         </div>
-      )}
+      ) : props.subscribed == 0 &&
+        props["demo used "] == 0 &&
+        props["is demo "] == 1 ? (
+        <>
+          <div className={styles.box}>
+            <div className={styles.container1} onClick={handleClick}>
+              {capitalize(props.name)}
+            </div>
+          </div>
+          <div className={styles.box}>
+            <CardDetails data={props} />
+
+            <Subscriptionform model_url={props.model_url} />
+          </div>
+        </>
+      ) : props.subscribed == 0 &&
+        props["demo used "] == 1 &&
+        props["is demo "] == 0 ? (
+        <>
+          <div className={styles.box}>
+            <div className={styles.container3}>{capitalize(props.name)}</div>
+          </div>
+          <div className={styles.box}>
+            <CardDetails data={props} />
+            <Subscriptionform model_url={props.model_url} />
+          </div>
+        </>
+      ) : props.subscribed == 0 &&
+        props["demo used "] == 1 &&
+        props["is demo "] == 1 &&
+        props.hit_limit > props.current_usage ? (
+        <>
+          <div className={styles.box}>
+            <div className={styles.container1} onClick={handleClick}>
+              {capitalize(props.name)}
+            </div>
+          </div>
+          <div className={styles.box}>
+            <CardDetails data={props} />
+            <Subscriptionform model_url={props.model_url} />
+          </div>
+        </>
+      ) : props.hit_limit == props.current_usage ? (
+        <>
+        <div className={styles.box}>
+          <div className={styles.container3}>{capitalize(props.name)}</div>
+        </div>
+        <div className={styles.box}>
+          <CardDetails data={props} />
+          <Subscriptionform model_url={props.model_url} />
+        </div>
+      </>
+      ):''}
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import Card from "../../components/card";
+// import Card from "../../components/card";
 import useApi from "../../hooks/useApi";
 import Dashboardlayout from "../../layouts/dashboard-layout";
 import { DetailContext } from "../../context/detailContext";
 import { useNavigate } from "react-router-dom";
+import Card from "../../components/card/index";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -29,11 +30,11 @@ export default function Home() {
       <DetailContext.Provider value={{ test: updateData }}>
         <div>
           {data &&
-            Object.keys(data).map((keyName, index: number) => {
+            Object.keys(data.message).map((keyName, index: number) => {
               return (
                 <Card
                   key={keyName}
-                  {...data[keyName]}
+                  {...data.message[keyName]}
                   name={keyName}
                   onClick={() => handleClick(index)}
                 />

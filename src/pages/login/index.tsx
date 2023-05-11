@@ -28,7 +28,7 @@ export default function Login() {
     fetchData(
       values,
       (res) => {
-        Cookies.set("token", res.token);
+        Cookies.set("token", res?.message?.token);
         navigate("/home");
       },
       (res) => {
