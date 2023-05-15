@@ -86,13 +86,22 @@ export default function Facerecognize() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        {data && data.name ? (
+        {data && data?.message?.name ? (
           <div className={styles.modalbox}>
-            <div>Name : {data.name}</div>
-            <div>Designation :{data.designation}</div>
+            <div>Name: {data?.message?.name}</div>
+            <div>Designation: {data?.message?.designation}</div>
           </div>
         ) : null}
-        {data && data.message ? (
+        {/* {data && data.message && typeof data.message === 'object' ? (
+  <div className={styles.modalbox}>
+    {Object.entries(data.message).map(([key, value]) => (
+      <div key={key}>
+        {key}: {JSON.stringify(value)}
+      </div>
+    ))}
+  </div>
+) : null} */}
+        {data && data?.message ? (
           <div className={styles.modalbox}>
             <div>oops!</div>
             <div>{data.message}</div>

@@ -34,8 +34,8 @@ export default function Detail() {
       <Dashboardlayout>
         <div className={styles.container}>
           {data &&
-            Object.keys(data).map((keyName) => (
-              <Dropdown key={keyName} options={data[keyName]} name={keyName} />
+            Object.keys(data?.message).map((keyName) => (
+              <Dropdown key={keyName} options={data.message[keyName]} name={keyName} />
             ))}
         </div>
       </Dashboardlayout>

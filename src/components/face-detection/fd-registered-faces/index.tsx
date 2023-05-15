@@ -18,9 +18,9 @@ export default function Registeredfaces() {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    if (data && data.length > 0) {
+    if (data && data?.message?.length > 0) {
       setTableData(
-        data.map((item: any, index: number) => ({
+        data?.message.map((item: any, index: number) => ({
           id: index + 1,
           name: item.name,
           designation: item.designation,
