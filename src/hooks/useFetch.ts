@@ -11,7 +11,7 @@ interface ApiResponse<T> {
   data: {
     [key: string]: any;
   } | null;
-  error: string | null;
+  error: any ;
   loading: boolean;
   fetchData: (
     values?: any,

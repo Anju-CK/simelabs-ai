@@ -8,7 +8,7 @@
   height: auto;
 }
 .innercontainer {
-  padding: 125px;
-  flex: 1;
-  height: auto;
+  padding: 120px 50px;
+  /* height: auto; */
+  height:100vh;
 }

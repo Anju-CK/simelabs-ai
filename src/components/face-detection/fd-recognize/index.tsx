@@ -7,7 +7,7 @@ import Modalcomponent from "../../modalcomponent";
 
 export default function Facerecognize() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, error, fetchData } = useFetch(
+  const { data, error , fetchData } = useFetch(
     "/face_detection/recognize/",
     "POST",
     undefined,
@@ -20,7 +20,6 @@ export default function Facerecognize() {
     formData.append("image", image as File);
     fetchData(formData);
   };
-
   return (
     <div className={styles.container}>
       <Formik
@@ -86,27 +85,24 @@ export default function Facerecognize() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        {data && data?.message?.name ? (
+        {data && !error && (data?.message?.name) && (
           <div className={styles.modalbox}>
             <div>Name: {data?.message?.name}</div>
             <div>Designation: {data?.message?.designation}</div>
           </div>
-        ) : null}
-        {/* {data && data.message && typeof data.message === 'object' ? (
-  <div className={styles.modalbox}>
-    {Object.entries(data.message).map(([key, value]) => (
-      <div key={key}>
-        {key}: {JSON.stringify(value)}
-      </div>
-    ))}
-  </div>
-) : null} */}
-        {data && data?.message ? (
+        ) } 
+        {data && !error && !(data?.message?.name)&& (
           <div className={styles.modalbox}>
             <div>oops!</div>
             <div>{data.message}</div>
           </div>
-        ) : null}
+        )}
+        
+        {error && (error?.message)  && (
+          <div className={styles.modalbox}>
+            <div>{error?.message}</div>
+          </div>
+        ) }
       </Modalcomponent>
     </div>
   );
