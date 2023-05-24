@@ -20,7 +20,6 @@ export default function Objectdetection() {
     formData.append("image", image as File);
     fetchData(formData);
   };
-  console.log("Test:", data);
 
   return (
     <div className={styles.container}>
@@ -87,59 +86,39 @@ export default function Objectdetection() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-       
-        {data ? (
+         
+{(data && !error ) && (
           <div className={styles.modalbox}>
-            <div>
-              <div className={styles.heading}>MDConfidence </div>{" "}
-              {data.MDConfidence ? `${data.MDConfidence}` : 0}
-            </div>
+            <div> 
+              {(data?.message?.MDConfidence)?<div className={styles.heading}>MDConfidence :{`${ data?.message?.MDConfidence}` }</div>:''}
+              {(data?.message?.MaskCord && Array.isArray(data.message.MaskCord)) ? <div className={styles.heading}>MaskCord : {(data?.message?.MaskCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
 
-            <div>
-              <div className={styles.heading}>MaskCord </div>
-              {data && data.MaskCord
-                ? data.MaskCord.map((cord: any) => <div key={cord}>{cord}</div>)
-                : 0}
-            </div>
+              {(data?.message?.GogglesConfidence)?<div className={styles.heading}>GogglesConfidence :{`${ data?.message?.GogglesConfidence}` }</div>:''}
+              {(data?.message?.gogglesCord && Array.isArray(data.message.gogglesCord)) ?<div className={styles.heading}>GogglesCord : {(data?.message?.gogglesCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
 
-            <div>
-              <div className={styles.heading}>GogglesConfidence </div>{" "}
-              {data.GogglesConfidence ? `${data.GogglesConfidence}` : 0}
-            </div>
-            <div>
-              <div className={styles.heading}>GogglesCord </div>
-              {data && data.gogglesCord
-                ? data.gogglesCord.map((cord: any) => (
-                    <div key={cord}>{cord}</div>
-                  ))
-                : 0}
-            </div>
+              {(data?.message?.PPEConfidence)?<div className={styles.heading}>PPEConfidence :{`${ data?.message?.PPEConfidence}` }</div>:''}
+              {(data?.message?.ppeCord && Array.isArray(data.message.ppeCord)) ?<div className={styles.heading}>PPECord : {(data?.message?.ppeCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
 
-            <div>
-              <div className={styles.heading}>PPEConfidence </div>{" "}
-              {data.PPEConfidence ? `${data.PPEConfidence}` : 0}
-            </div>
-            <div>
-              <div className={styles.heading}>PPECord </div>
-              {data && data.ppeCord
-                ? data.ppeCord.map((cord: any) => <div key={cord}>{cord}</div>)
-                : 0}
-            </div>
-
-            <div>
-              <div className={styles.heading}>HelmetConfidence</div>{" "}
-              {data.HelmetConfidence ? `${data.HelmetConfidence}` : 0}
-            </div>
-            <div>
-              <div className={styles.heading}>HelmetCord </div>
-              {data && data.helmetCord
-                ? data.helmetCord.map((cord: any) => (
-                    <div key={cord}>{cord}</div>
-                  ))
-                : 0}
+              {(data?.message?.HelmetConfidence)?<div className={styles.heading}>HelmetConfidence :{`${ data?.message?.HelmetConfidence}` }</div>:''}
+              {(data?.message?.helmetCord && Array.isArray(data.message.helmetCord)) ?<div className={styles.heading}>HelmetCord : {(data?.message?.helmetCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
             </div>
           </div>
-        ) : null}
+        ) }
+{data && !error && !((data?.message?.MDConfidence)||(data?.message?.GogglesConfidence)||(data?.message?.PPEConfidence)|| (data?.message?.HelmetConfidence)) &&(
+          <div className={styles.modalbox}>
+            <div>oops!</div>
+            <div>No Object Detected</div>
+          </div>
+        )}
+
+{error && (error?.message) ? (
+          <div className={styles.modalbox}>
+            <div>
+              {error?.message}
+            </div>
+          </div> ):null  
+          }
+
       </Modalcomponent>
     </div>
   );

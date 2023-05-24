@@ -12,7 +12,7 @@ export default function Card(props: any) {
   };
   return (
     <div className={styles.container}>
-      {props.subscribed == 1 ? (
+      {props.subscribed == 1 && (props.current_usage < props.hit_limit)? (
         <>
           <div className={styles.box}>
             <div className={styles.container1} onClick={handleClick}>
