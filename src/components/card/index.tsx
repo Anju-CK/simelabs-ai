@@ -56,7 +56,7 @@ export default function Card(props: any) {
           <div className={styles.box}>
             <CardDetails data={props} />
 
-            <Subscriptionform model_url={props.model_url} />
+            <div className={styles.subscriptionbtn}><Subscriptionform model_url={props.model_url} /></div>
           </div>
         </>
       ) : props.subscribed == 0 &&
@@ -68,7 +68,7 @@ export default function Card(props: any) {
           </div>
           <div className={styles.box}>
             <CardDetails data={props} />
-            <Subscriptionform model_url={props.model_url} />
+            <div className={styles.subscriptionbtn}><Subscriptionform model_url={props.model_url} /></div>
           </div>
         </>
       ) : props.subscribed == 0 &&
@@ -83,7 +83,7 @@ export default function Card(props: any) {
           </div>
           <div className={styles.box}>
             <CardDetails data={props} />
-            <Subscriptionform model_url={props.model_url} />
+            <div className={styles.subscriptionbtn}><Subscriptionform model_url={props.model_url} /></div>
           </div>
         </>
       ) : props.hit_limit == props.current_usage ? (
@@ -93,7 +93,7 @@ export default function Card(props: any) {
         </div>
         <div className={styles.box}>
           <CardDetails data={props} />
-          <Subscriptionform model_url={props.model_url} />
+          <div className={styles.subscriptionbtn}><Subscriptionform model_url={props.model_url} /></div>
         </div>
       </>
       ):''}
