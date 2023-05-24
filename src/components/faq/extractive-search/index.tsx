@@ -153,9 +153,9 @@ export default function Extractivesearch() {
         onClose={() => setIsModalOpen(false)}
       >
         {data &&
-        data.response ? (
+        data?.message?.response ? (
           <div className={styles.modalbox}>
-            <div>{data.response}</div>
+            <div>{data?.message?.response}</div>
           </div>
         ) : null}
       </Modalcomponent>

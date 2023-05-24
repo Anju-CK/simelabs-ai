@@ -152,9 +152,9 @@ export default function Faqsearch() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        {data && data.response ? (
+        {data && data?.message?.response ? (
           <div className={styles.modalbox}>
-            <div>{data.response}</div>
+            <div>{data?.message?.response}</div>
           </div>
         ) : null}
       </Modalcomponent>
