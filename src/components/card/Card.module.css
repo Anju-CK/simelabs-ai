@@ -52,10 +52,15 @@
   justify-content: space-between;
 }
 .subscriptionbtn{
-  position: absolute;
-  right: 60px;
+ 
 }
-@media only screen and (max-width: 936px) {
+.cancelbtn{
+  
+}
+.demobtn{
+
+}
+@media only screen and (max-width: 1035px) {
   .layout{
     display: flex;
     flex-direction: row;
@@ -65,5 +70,28 @@
   }
   .container5 {
     flex-direction: column;
+  }
+  .container {
+    margin-top: 40px;
+    height: 100%;
+    background-color: rgb(172, 182, 195);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+  }
+  .cancelbtn{
+    position: absolute;
+    top: 108px;
+    right: -50px;
+    z-index: 1;
+  }
+  .subscriptionbtn{
+    position: absolute;
+    top: 108px;
+    right: 12px;
+    z-index: 1;
+  }
+  .optionbtn{
+    z-index: 1;
   }
 }

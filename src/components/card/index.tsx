@@ -27,7 +27,7 @@ export default function Card(props: any) {
           <div className={styles.box}>
             <CardDetails data={props} />
             <div className={styles.cancel}>
-              <Cancel model_url={props.model_url} />
+              <div className={styles.cancelbtn}><Cancel model_url={props.model_url} /></div>
             </div>
           </div>
         </>
@@ -40,8 +40,8 @@ export default function Card(props: any) {
           <div className={styles.container3}>{capitalize(props.name)}</div>
 
           <div className={styles.btn}>
-            <Demo model_url={props.model_url} />
-            <Subscriptionform model_url={props.model_url} />
+            <div className={styles.optionbtn}><Demo model_url={props.model_url} /></div>
+            <div className={styles.optionbtn}><Subscriptionform model_url={props.model_url} /></div>
           </div>
         </div>
       ) : props.subscribed == 0 &&
