@@ -10,5 +10,6 @@
 .innercontainer {
   padding: 120px 50px;
   /* height: auto; */
-  height:100vh;
+  min-height: 100vh;
+  height: auto;
 }
