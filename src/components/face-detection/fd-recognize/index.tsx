@@ -4,10 +4,11 @@ import styles from "./Facerecognize.module.css";
 import useFetch from "../../../hooks/useFetch";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
+import loadingGif from "../../../assets/gif/loader.gif";
 
 export default function Facerecognize() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, error , fetchData } = useFetch(
+  const { data, error , loading,fetchData } = useFetch(
     "/face_detection/recognize/",
     "POST",
     undefined,
@@ -81,6 +82,15 @@ export default function Facerecognize() {
           </Form>
         )}
       </Formik>
+      {loading? 
+      <Modalcomponent
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    >
+          <div className={styles.modalbox}>
+            <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
+          </div>
+      </Modalcomponent>:
       <Modalcomponent
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -103,7 +113,7 @@ export default function Facerecognize() {
             <div>{error?.message}</div>
           </div>
         ) }
-      </Modalcomponent>
+      </Modalcomponent>}
     </div>
   );
 }
