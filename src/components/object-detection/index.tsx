@@ -4,10 +4,11 @@ import styles from "./Objectdetection.module.css";
 import useFetch from "../../hooks/useFetch";
 import { useState } from "react";
 import Modalcomponent from "../modalcomponent";
+import loadingGif from "../../assets/gif/loader.gif";
 
 export default function Objectdetection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, error, fetchData } = useFetch(
+  const { data, error, loading,fetchData } = useFetch(
     "/object_detection/identify_obj/",
     "POST",
     undefined,
@@ -20,7 +21,7 @@ export default function Objectdetection() {
     formData.append("image", image as File);
     fetchData(formData);
   };
-
+  
   return (
     <div className={styles.container}>
       <Formik
@@ -82,12 +83,21 @@ export default function Objectdetection() {
           </Form>
         )}
       </Formik>
+      {loading? 
       <Modalcomponent
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    >
+          <div className={styles.modalbox}>
+            <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
+          </div>
+      </Modalcomponent>:
+        <Modalcomponent
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
          
-{(data && !error ) && (
+{(data && !error ) && 
           <div className={styles.modalbox}>
             <div> 
               {(data?.message?.MDConfidence)?<div className={styles.heading}>MDConfidence :{`${ data?.message?.MDConfidence}` }</div>:''}
@@ -103,23 +113,22 @@ export default function Objectdetection() {
               {(data?.message?.helmetCord && Array.isArray(data.message.helmetCord)) ?<div className={styles.heading}>HelmetCord : {(data?.message?.helmetCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
             </div>
           </div>
-        ) }
-{data && !error && !((data?.message?.MDConfidence)||(data?.message?.GogglesConfidence)||(data?.message?.PPEConfidence)|| (data?.message?.HelmetConfidence)) &&(
+       }
+{data && !error && !((data?.message?.MDConfidence)||(data?.message?.GogglesConfidence)||(data?.message?.PPEConfidence)|| (data?.message?.HelmetConfidence))&&
           <div className={styles.modalbox}>
             <div>oops!</div>
             <div>No Object Detected</div>
           </div>
-        )}
+        }
 
-{error && (error?.message) ? (
+{error && (error?.message) && 
           <div className={styles.modalbox}>
             <div>
               {error?.message}
             </div>
-          </div> ):null  
+          </div>
           }
-
-      </Modalcomponent>
+      </Modalcomponent>}
     </div>
   );
 }
