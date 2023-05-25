@@ -16,6 +16,8 @@
 .contentbox{
     padding-left: 20px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .table{
     width: 100%;
@@ -41,4 +43,17 @@
 }
   tr:nth-child(even){
     background-color: #f2f2f2;
+}
+.tablecontainer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.paginationstyle{
+  /* display: flex;
+  justify-content: flex-end;
+  margin-top: 40px; */
+  position: fixed;
+  top: 630px;
+  right: 90px;
 }
