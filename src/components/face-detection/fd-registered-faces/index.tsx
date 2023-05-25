@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import useApi from "../../../hooks/useApi";
 import Deleteface from "../fd-delete";
 import { UpdateContext } from "../../../context/updateContext";
+import loadingGif from "../../../assets/gif/loader.gif";
+import images from "../../../assets/images.jpg";
+import styles from "./Registeredfaces.module.css";
 
 export default function Registeredfaces() {
-  const { data, error, fetchData } = useApi(
+  const { data, error,loading, fetchData } = useApi(
     "/face_detection/registered_faces/",
     "GET",
     undefined,
@@ -12,7 +15,7 @@ export default function Registeredfaces() {
   );
 
   useEffect(() => {
-    fetchData();
+    fetchData()
   }, []);
 
   const [tableData, setTableData] = useState([]);
@@ -35,8 +38,13 @@ export default function Registeredfaces() {
 
   return (
     <UpdateContext.Provider value={{ test: updateData }}>
-      <div>
-        <h1>Registered Faces</h1>
+      {loading?
+      <div className={styles.container}>
+        <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
+      </div>:
+      <>
+        <img src={images} alt="Images..." className={styles.images}/>
+        <div className={styles.contentbox}>
         <table>
           <thead>
             <tr>
@@ -60,7 +68,8 @@ export default function Registeredfaces() {
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
+      </>}
     </UpdateContext.Provider>
   );
 }

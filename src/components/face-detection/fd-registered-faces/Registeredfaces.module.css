@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+.gifimage {
+    width: 200px;
+    height: 200px;
+  }
+.images{
+    height: 250px;
+    border-radius: 50%;
+}
+.contentbox{
+    padding-left: 40px;
+}
