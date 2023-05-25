@@ -51,7 +51,7 @@ export default function Deleteface({
       {
         name: "offset",
         options: {
-          offset: [0, 18],
+          offset: [0, 5],
         },
       },
     ],
@@ -95,7 +95,7 @@ export default function Deleteface({
             {...attributes.popper}
           >
             <div ref={popperWrapperRef} className={formStyles.container}>
-              <h3>Are you sure you want to delete {name}?</h3>
+              <h6>Are you sure you want to delete {name}?</h6>
               <div className={formStyles.button}>
                 <button onClick={onSubmitHandler} className={formStyles.deletebtn}>Delete</button>
                 <button onClick={togglePopper} className={formStyles.cancelbtn}>Cancel</button>

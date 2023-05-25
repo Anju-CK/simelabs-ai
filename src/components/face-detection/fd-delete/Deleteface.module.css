@@ -29,11 +29,13 @@
     border: none;
     border-radius: 5px;
     height: 35px;
+    margin-left: 10px;
 }
 .button{
     display: flex;
     align-items: center;
-    justify-content:space-between;
-    padding-left: 120px;
-    padding-right: 120px;
+    justify-content: center;
+    /* justify-content:space-between; */
+    /* padding-left: 120px; */
+    /* padding-right: 120px; */
 }
