@@ -45,13 +45,14 @@ export default function Registeredfaces() {
       <>
         <img src={images} alt="Images..." className={styles.images}/>
         <div className={styles.contentbox}>
-        <table>
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
               <th>Designation</th>
               <th>Email</th>
+              <th> </th>
             </tr>
           </thead>
           <tbody>
