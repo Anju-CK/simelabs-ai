@@ -21,7 +21,7 @@ export default function Registeredfaces() {
   }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 2;
   const totalPages = Math.ceil(data?.message.length / itemsPerPage);
 
   const handlePageChange = (page:number) => {
