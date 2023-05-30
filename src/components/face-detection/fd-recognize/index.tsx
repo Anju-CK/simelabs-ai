@@ -5,8 +5,11 @@ import useFetch from "../../../hooks/useFetch";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
 import loadingGif from "../../../assets/gif/loader.gif";
+interface FacerecognizeProps{
+  toggling: ()=> void,
+}
 
-export default function Facerecognize() {
+export default function Facerecognize(props:FacerecognizeProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, error , loading,fetchData } = useFetch(
     "/face_detection/recognize/",
@@ -93,7 +96,10 @@ export default function Facerecognize() {
       </Modalcomponent>:
       <Modalcomponent
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+        }}
       >
         {data && !error && (data?.message?.name) && (
           <div className={styles.modalbox}>

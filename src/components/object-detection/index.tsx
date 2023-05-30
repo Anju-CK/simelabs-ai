@@ -5,8 +5,11 @@ import useFetch from "../../hooks/useFetch";
 import { useState } from "react";
 import Modalcomponent from "../modalcomponent";
 import loadingGif from "../../assets/gif/loader.gif";
+interface ObjectdetectionProps{
+  toggling: ()=> void;
+}
 
-export default function Objectdetection() {
+export default function Objectdetection(props:ObjectdetectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, error, loading,fetchData } = useFetch(
     "/object_detection/identify_obj/",
@@ -94,7 +97,10 @@ export default function Objectdetection() {
       </Modalcomponent>:
         <Modalcomponent
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+        }}
       >
          
 {(data && !error ) && 

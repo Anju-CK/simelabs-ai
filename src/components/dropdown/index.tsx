@@ -34,9 +34,9 @@ export default function Dropdown(props: any) {
             </div>
             {open === index && (
               <div className={styles.contentContainer}>
-                {info === "View Registered Faces" && <Registeredfaces />}
-                {info === "Recognize Face" && <Facerecognize />}
-                {info === "Register Face" && <Faceregister />}
+                {info === "View Registered Faces" && <Registeredfaces/>}
+                {info === "Recognize Face" && <Facerecognize toggling={() => handleToggle(index)}/>}
+                {info === "Register Face" && <Faceregister/>}
               </div>
             )}
           </div>
@@ -56,7 +56,7 @@ export default function Dropdown(props: any) {
               <div className={styles.contentContainer}>
                 {info ===
                   "Detect safety gears(Mask, PP Kit, Googles, Helmet)" && (
-                  <Objectdetection />
+                  <Objectdetection toggling={() => handleToggle(index)}/>
                 )}
               </div>
             )}
@@ -75,9 +75,9 @@ export default function Dropdown(props: any) {
             </div>
             {open === index && (
               <div className={styles.contentContainer}>
-                {info === "Extractive Search" && <Extractivesearch />}
-                {info === "FAQ Search" && <Faqsearch />}
-                {info === "Document Upload" && <Documentupload />}
+                {info === "Extractive Search" && <Extractivesearch/>}
+                {info === "FAQ Search" && <Faqsearch/>}
+                {info === "Document Upload" && <Documentupload/>}
               </div>
             )}
           </div>
