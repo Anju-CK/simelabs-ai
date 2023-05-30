@@ -54,7 +54,10 @@
   /* display: flex;
   justify-content: flex-end;
   margin-top: 40px; */
-  position: fixed;
+  /* position: fixed;
   top: 660px;
-  right: 90px;
+  right: 90px; */
+  position: absolute;
+  top: 280px;
+  right: 30px;
 }
