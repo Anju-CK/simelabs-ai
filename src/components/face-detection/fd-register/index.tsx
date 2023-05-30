@@ -76,6 +76,7 @@ export default function Faceregister() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
+                autoComplete="off"
               />
               <ErrorMessage
                 name="face_name"
@@ -96,6 +97,7 @@ export default function Faceregister() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
+                autoComplete="off"
               />
               <ErrorMessage
                 name="face_designation"
@@ -139,6 +141,7 @@ export default function Faceregister() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={styles.inputbox}
+                autoComplete="off"
               />
               <ErrorMessage
                 name="face_email"
