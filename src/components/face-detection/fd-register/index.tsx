@@ -4,6 +4,7 @@ import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import useFetch from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import loadingGif from "../../../assets/gif/loader.gif";
 
 interface FormValues {
   face_name: string;
@@ -159,7 +160,7 @@ export default function Faceregister(props:FaceregisterProps) {
                 type="submit"
                 className={styles.btntxt + " " + styles.register}
               >
-                Register
+                {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :' Register'}
               </button>
               <button
                 type="reset"

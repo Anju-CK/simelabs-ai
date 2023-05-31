@@ -4,6 +4,7 @@ import { useContext, useRef, useState } from "react";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { UpdateContext } from "../../../context/updateContext";
 import formStyles from "./Deleteface.module.css";
+import loadingGif from "../../../assets/gif/loader.gif";
 
 type Placement =
   | "auto"
@@ -64,7 +65,7 @@ export default function Deleteface({
   };
 
   useOutsideClick(popperWrapperRef, setOpen, popperBtnDivRef);
-  const { data, error, fetchData } = useApi(
+  const { data, error,loading, fetchData } = useApi(
     "/face_detection/delete/",
     "DELETE",
     undefined,
@@ -97,7 +98,8 @@ export default function Deleteface({
             <div ref={popperWrapperRef} className={formStyles.container}>
               <h6>Are you sure you want to delete {name}?</h6>
               <div className={formStyles.button}>
-                <button onClick={onSubmitHandler} className={formStyles.deletebtn}>Delete</button>
+                <button onClick={onSubmitHandler} className={formStyles.deletebtn}>
+                  {loading? <img src={loadingGif} alt="Loading..." className={formStyles.gifimage} /> :' Delete'}</button>
                 <button onClick={togglePopper} className={formStyles.cancelbtn}>Cancel</button>
               </div>
             </div>

@@ -22,6 +22,7 @@
     border: none;
     border-radius: 5px;
     height: 35px;
+    width: 68px;
 }
 .cancelbtn{
     background-color: black;
@@ -30,6 +31,7 @@
     border-radius: 5px;
     height: 35px;
     margin-left: 10px;
+    width: 68px;
 }
 .button{
     display: flex;
@@ -39,3 +41,7 @@
     /* padding-left: 120px; */
     /* padding-right: 120px; */
 }
+.gifimage{
+    width: 25px;
+    height: 25px;
+  }
