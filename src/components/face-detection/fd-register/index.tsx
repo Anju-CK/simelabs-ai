@@ -16,7 +16,7 @@ interface FaceregisterProps{
 }
 
 export default function Faceregister(props:FaceregisterProps) {
-  const { data, error, fetchData } = useFetch(
+  const { data, error, loading, fetchData } = useFetch(
     "/face_detection/register/",
     "POST",
     undefined,
@@ -36,11 +36,11 @@ export default function Faceregister(props:FaceregisterProps) {
     fetchData(
       formData,
       () => {
+        props.toggling();
         toast.success("Registration Successful!", {
           position: toast.POSITION.BOTTOM_CENTER,
           autoClose: 1000,
         });
-        props.toggling();
       },
       () => {
         toast.error("Email already exist", {
