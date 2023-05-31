@@ -11,8 +11,11 @@ interface FormValues {
   face_email: string;
   images?: File | null;
 }
+interface FaceregisterProps{
+  toggling: ()=> void;
+}
 
-export default function Faceregister() {
+export default function Faceregister(props:FaceregisterProps) {
   const { data, error, fetchData } = useFetch(
     "/face_detection/register/",
     "POST",
@@ -37,6 +40,7 @@ export default function Faceregister() {
           position: toast.POSITION.BOTTOM_CENTER,
           autoClose: 1000,
         });
+        props.toggling();
       },
       () => {
         toast.error("Email already exist", {

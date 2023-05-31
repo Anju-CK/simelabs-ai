@@ -36,7 +36,7 @@ export default function Dropdown(props: any) {
               <div className={styles.contentContainer}>
                 {info === "View Registered Faces" && <Registeredfaces/>}
                 {info === "Recognize Face" && <Facerecognize toggling={() => handleToggle(index)}/>}
-                {info === "Register Face" && <Faceregister/>}
+                {info === "Register Face" && <Faceregister toggling={() => handleToggle(index)}/>}
               </div>
             )}
           </div>
