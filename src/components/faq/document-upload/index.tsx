@@ -4,6 +4,7 @@ import styles from "./Documentupload.module.css";
 import useFetch from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import loadingGif from "../../../assets/gif/loader.gif";
 
 
 interface FormValues {
@@ -12,9 +13,12 @@ interface FormValues {
   FAQ_generate: string;
   meta_filters: string;
 }
+interface DocumentuploadProps{
+  toggling: ()=> void;
+}
 
-export default function Documentupload() {
-  const { data, error, fetchData } = useFetch(
+export default function Documentupload(props:DocumentuploadProps) {
+  const { data, error,loading, fetchData } = useFetch(
     "/oxylym_faq/document_upload/",
     "POST",
     undefined,
@@ -32,6 +36,7 @@ export default function Documentupload() {
     }
     fetchData(formData,
       () => {
+      props.toggling();
       toast.success("Uploading Successful!", {
         position: toast.POSITION.BOTTOM_CENTER,
         autoClose: 1000,
@@ -160,7 +165,7 @@ export default function Documentupload() {
                 type="submit"
                 className={styles.btntxt + " " + styles.upload}
               >
-                Upload
+                {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Upload'}
               </button>
               <button
                 type="reset"
