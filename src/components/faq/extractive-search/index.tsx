@@ -5,6 +5,7 @@ import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
 import loadingGif from "../../../assets/gif/loader.gif";
+import { useNavigate } from "react-router-dom";
 
 interface ExtractivesearchProps{
   toggling: ()=> void;
@@ -12,7 +13,7 @@ interface ExtractivesearchProps{
 
 export default function Extractivesearch(props:ExtractivesearchProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const navigate = useNavigate();
 
   const { data, error,loading, fetchData } = useApi(
     "/oxylym_faq/extractive_search/",
@@ -22,8 +23,8 @@ export default function Extractivesearch(props:ExtractivesearchProps) {
   );
   const onSubmitHandler = (values: any) => {
     fetchData(values);
-    console.log(values)
   };
+
   return (
     <div className={styles.container}>
       <Formik
@@ -163,7 +164,8 @@ export default function Extractivesearch(props:ExtractivesearchProps) {
             <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
           </div>
       </Modalcomponent>: */}
-      {!loading && <Modalcomponent
+      {!loading && data &&
+       <Modalcomponent
         isOpen={isModalOpen}
         onClose={() => {
           setIsModalOpen(false);
@@ -171,12 +173,31 @@ export default function Extractivesearch(props:ExtractivesearchProps) {
         }}
       >
         {data &&
-        data?.message?.response ? (
+        data?.message ? (
           <div className={styles.modalbox}>
-            <div>{data?.message?.response}</div>
+            <div>{data?.message}</div>
           </div>
         ) : null}
       </Modalcomponent>}
+
+      {!loading && error && 
+        <Modalcomponent
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+          navigate("/home");
+        }}
+      >
+{error  && (error?.message)&& 
+          <div className={styles.modalbox}>
+            <div>
+              {error?.message}
+            </div>
+          </div>
+          }
+      </Modalcomponent>}
+
       {/* } */}
     </div>
   );

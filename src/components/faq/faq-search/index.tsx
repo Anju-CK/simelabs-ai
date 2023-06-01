@@ -5,6 +5,7 @@ import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
 import loadingGif from "../../../assets/gif/loader.gif";
+import { useNavigate } from "react-router-dom";
 
 interface FaqsearchProps{
   toggling: ()=> void;
@@ -12,6 +13,7 @@ interface FaqsearchProps{
 
 export default function Faqsearch(props:FaqsearchProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { data, error, loading,fetchData } = useApi(
     "/oxylym_faq/faq_search/",
@@ -170,11 +172,29 @@ export default function Faqsearch(props:FaqsearchProps) {
           props.toggling();
         }}
       >
-        {data && data?.message?.response ? (
+        {data && data?.message ? (
           <div className={styles.modalbox}>
-            <div>{data?.message?.response}</div>
+            <div>{data?.message}</div>
           </div>
         ) : null}
+      </Modalcomponent>}
+
+      {!loading && error && 
+        <Modalcomponent
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+          navigate("/home");
+        }}
+      >
+{error  && (error?.message)&& 
+          <div className={styles.modalbox}>
+            <div>
+              {error?.message}
+            </div>
+          </div>
+          }
       </Modalcomponent>}
        {/* } */}
     </div>
