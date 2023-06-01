@@ -5,12 +5,14 @@ import useFetch from "../../../hooks/useFetch";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
 import loadingGif from "../../../assets/gif/loader.gif";
+import { useNavigate } from "react-router-dom";
 interface FacerecognizeProps{
   toggling: ()=> void,
 }
 
 export default function Facerecognize(props:FacerecognizeProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const { data, error , loading,fetchData } = useFetch(
     "/face_detection/recognize/",
     "POST",
@@ -64,7 +66,8 @@ export default function Facerecognize(props:FacerecognizeProps) {
                   setIsModalOpen(true);
                 }}
               >
-                Recognize
+               { loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>:'Recognize'}
+                {/* Recognize */}
               </button>
               <button
                 type="reset"
@@ -85,7 +88,7 @@ export default function Facerecognize(props:FacerecognizeProps) {
           </Form>
         )}
       </Formik>
-      {loading? 
+      {/* {loading? 
       <Modalcomponent
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
@@ -93,8 +96,9 @@ export default function Facerecognize(props:FacerecognizeProps) {
           <div className={styles.modalbox}>
             <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
           </div>
-      </Modalcomponent>:
-      <Modalcomponent
+      </Modalcomponent>: */}
+    {!loading && data &&
+     <Modalcomponent
         isOpen={isModalOpen}
         onClose={() => {
           setIsModalOpen(false);
@@ -114,12 +118,30 @@ export default function Facerecognize(props:FacerecognizeProps) {
           </div>
         )}
         
+        {/* {error && (error?.message)  && (
+          <div className={styles.modalbox}>
+            <div>{error?.message}</div>
+          </div>
+        ) } */}
+      </Modalcomponent>}
+
+
+      {!loading && error &&
+     <Modalcomponent
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+          navigate("/home");
+        }}
+      >
         {error && (error?.message)  && (
           <div className={styles.modalbox}>
             <div>{error?.message}</div>
           </div>
         ) }
       </Modalcomponent>}
+      {/* } */}
     </div>
   );
 }
