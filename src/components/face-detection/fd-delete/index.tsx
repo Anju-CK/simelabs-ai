@@ -5,6 +5,7 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { UpdateContext } from "../../../context/updateContext";
 import formStyles from "./Deleteface.module.css";
 import loadingGif from "../../../assets/gif/loader.gif";
+import { toast } from "react-toastify";
 
 type Placement =
   | "auto"
@@ -74,6 +75,10 @@ export default function Deleteface({
   const onSubmitHandler = () => {
     fetchData({ email: email }, () => {
       typeof context.test === "function" && context.test();
+      toast.success("Deletion Successful!", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1000,
+      });
     });
   };
   return (
