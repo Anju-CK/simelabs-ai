@@ -65,7 +65,7 @@ export default function Objectdetection(props:ObjectdetectionProps) {
                   setIsModalOpen(true);
                 }}
               >
-                Detect
+                {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>:'Detect'}
               </button>
               <button
                 type="reset"
@@ -86,7 +86,7 @@ export default function Objectdetection(props:ObjectdetectionProps) {
           </Form>
         )}
       </Formik>
-      {loading? 
+      {/* {loading? 
       <Modalcomponent
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
@@ -94,7 +94,8 @@ export default function Objectdetection(props:ObjectdetectionProps) {
           <div className={styles.modalbox}>
             <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
           </div>
-      </Modalcomponent>:
+      </Modalcomponent>: */}
+        {!loading && 
         <Modalcomponent
         isOpen={isModalOpen}
         onClose={() => {
@@ -106,17 +107,17 @@ export default function Objectdetection(props:ObjectdetectionProps) {
 {(data && !error ) && 
           <div className={styles.modalbox}>
             <div> 
-              {(data?.message?.MDConfidence)?<div className={styles.heading}>MDConfidence :{`${ data?.message?.MDConfidence}` }</div>:''}
-              {(data?.message?.MaskCord && Array.isArray(data.message.MaskCord)) ? <div className={styles.heading}>MaskCord : {(data?.message?.MaskCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
+              {(data?.message?.MDConfidence)?<div className={styles.heading}>MDConfidence <div className={styles.result}>{`${ data?.message?.MDConfidence}` }</div></div>:''}
+              {(data?.message?.MaskCord && Array.isArray(data.message.MaskCord)) ? <div className={styles.heading}>MaskCord  {(data?.message?.MaskCord).map((cord: any) => <div key={cord} className={styles.result}>{cord}</div>)}</div>:''}
 
-              {(data?.message?.GogglesConfidence)?<div className={styles.heading}>GogglesConfidence :{`${ data?.message?.GogglesConfidence}` }</div>:''}
-              {(data?.message?.gogglesCord && Array.isArray(data.message.gogglesCord)) ?<div className={styles.heading}>GogglesCord : {(data?.message?.gogglesCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
+              {(data?.message?.GogglesConfidence)?<div className={styles.heading}>GogglesConfidence <div className={styles.result}>{`${ data?.message?.GogglesConfidence}` }</div></div>:''}
+              {(data?.message?.gogglesCord && Array.isArray(data.message.gogglesCord)) ?<div className={styles.heading}>GogglesCord  {(data?.message?.gogglesCord).map((cord: any) => <div key={cord} className={styles.result}>{cord}</div>)}</div>:''}
 
-              {(data?.message?.PPEConfidence)?<div className={styles.heading}>PPEConfidence :{`${ data?.message?.PPEConfidence}` }</div>:''}
-              {(data?.message?.ppeCord && Array.isArray(data.message.ppeCord)) ?<div className={styles.heading}>PPECord : {(data?.message?.ppeCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
+              {(data?.message?.PPEConfidence)?<div className={styles.heading}>PPEConfidence <div className={styles.result}>{`${ data?.message?.PPEConfidence}` }</div></div>:''}
+              {(data?.message?.ppeCord && Array.isArray(data.message.ppeCord)) ?<div className={styles.heading}>PPECord : {(data?.message?.ppeCord).map((cord: any) => <div key={cord} className={styles.result}>{cord}</div>)}</div>:''}
 
-              {(data?.message?.HelmetConfidence)?<div className={styles.heading}>HelmetConfidence :{`${ data?.message?.HelmetConfidence}` }</div>:''}
-              {(data?.message?.helmetCord && Array.isArray(data.message.helmetCord)) ?<div className={styles.heading}>HelmetCord : {(data?.message?.helmetCord).map((cord: any) => <div key={cord}>{cord}</div>)}</div>:''}
+              {(data?.message?.HelmetConfidence)?<div className={styles.heading}>HelmetConfidence <div className={styles.result}>{`${ data?.message?.HelmetConfidence}` }</div></div>:''}
+              {(data?.message?.helmetCord && Array.isArray(data.message.helmetCord)) ?<div className={styles.heading}>HelmetCord : {(data?.message?.helmetCord).map((cord: any) => <div key={cord} className={styles.result}>{cord}</div>)}</div>:''}
             </div>
           </div>
        }
@@ -135,6 +136,7 @@ export default function Objectdetection(props:ObjectdetectionProps) {
           </div>
           }
       </Modalcomponent>}
+      {/* } */}
     </div>
   );
 }
