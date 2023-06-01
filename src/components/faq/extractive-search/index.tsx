@@ -4,12 +4,17 @@ import useApi from "../../../hooks/useApi";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
+import loadingGif from "../../../assets/gif/loader.gif";
 
-export default function Extractivesearch() {
+interface ExtractivesearchProps{
+  toggling: ()=> void;
+}
+
+export default function Extractivesearch(props:ExtractivesearchProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-  const { data, error, fetchData } = useApi(
+  const { data, error,loading, fetchData } = useApi(
     "/oxylym_faq/extractive_search/",
     "POST",
     undefined,
@@ -136,7 +141,8 @@ export default function Extractivesearch() {
                   setIsModalOpen(true);
                 }}
               >
-                Search
+                {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Search'}
+                {/* Search */}
               </button>
               <button
                 type="reset"
@@ -148,9 +154,21 @@ export default function Extractivesearch() {
           </Form>
         )}
       </Formik>
+      {/* {loading? 
       <Modalcomponent
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    >
+          <div className={styles.modalbox}>
+            <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
+          </div>
+      </Modalcomponent>: */}
+      {!loading && <Modalcomponent
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+        }}
       >
         {data &&
         data?.message?.response ? (
@@ -158,7 +176,8 @@ export default function Extractivesearch() {
             <div>{data?.message?.response}</div>
           </div>
         ) : null}
-      </Modalcomponent>
+      </Modalcomponent>}
+      {/* } */}
     </div>
   );
 }

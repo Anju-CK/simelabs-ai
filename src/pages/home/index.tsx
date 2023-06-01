@@ -5,10 +5,12 @@ import Dashboardlayout from "../../layouts/dashboard-layout";
 import { DetailContext } from "../../context/detailContext";
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/card/index";
+import loadingGif from "../../assets/gif/loader.gif";
+import styles from "./Home.module.css"
 
 export default function Home() {
   const navigate = useNavigate();
-  const { data, error, fetchData } = useApi(
+  const { data, error,loading, fetchData } = useApi(
     "/users/model_usage/",
     "GET",
     undefined,
@@ -28,6 +30,11 @@ export default function Home() {
   return (
     <Dashboardlayout>
       <DetailContext.Provider value={{ test: updateData }}>
+        {loading? 
+        <div className={styles.loaderstyling}>
+        <img src={loadingGif} alt="Loading..." />
+        </div>   
+        : 
         <div>
           {data &&
             Object.keys(data.message).map((keyName, index: number) => {
@@ -40,7 +47,7 @@ export default function Home() {
                 />
               );
             })}
-        </div>
+        </div>}
       </DetailContext.Provider>
     </Dashboardlayout>
   );

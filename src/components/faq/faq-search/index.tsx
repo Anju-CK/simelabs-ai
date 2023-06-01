@@ -4,11 +4,16 @@ import useApi from "../../../hooks/useApi";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./schema";
 import { useState } from "react";
 import Modalcomponent from "../../modalcomponent";
+import loadingGif from "../../../assets/gif/loader.gif";
 
-export default function Faqsearch() {
+interface FaqsearchProps{
+  toggling: ()=> void;
+}
+
+export default function Faqsearch(props:FaqsearchProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, error, fetchData } = useApi(
+  const { data, error, loading,fetchData } = useApi(
     "/oxylym_faq/faq_search/",
     "POST",
     undefined,
@@ -136,7 +141,8 @@ export default function Faqsearch() {
                   setIsModalOpen(true);
                 }}
               >
-                Search
+                {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Search'}
+                {/* Search */}
               </button>
               <button
                 type="reset"
@@ -148,16 +154,29 @@ export default function Faqsearch() {
           </Form>
         )}
       </Formik>
+      {/* {loading? 
       <Modalcomponent
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    >
+          <div className={styles.modalbox}>
+            <img src={loadingGif} alt="Loading..." className={styles.gifimage}/>
+          </div>
+      </Modalcomponent>: */}
+      {!loading && <Modalcomponent
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+        }}
       >
         {data && data?.message?.response ? (
           <div className={styles.modalbox}>
             <div>{data?.message?.response}</div>
           </div>
         ) : null}
-      </Modalcomponent>
+      </Modalcomponent>}
+       {/* } */}
     </div>
   );
 }

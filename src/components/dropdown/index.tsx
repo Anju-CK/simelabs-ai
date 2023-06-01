@@ -75,9 +75,9 @@ export default function Dropdown(props: any) {
             </div>
             {open === index && (
               <div className={styles.contentContainer}>
-                {info === "Extractive Search" && <Extractivesearch/>}
-                {info === "FAQ Search" && <Faqsearch/>}
-                {info === "Document Upload" && <Documentupload/>}
+                {info === "Extractive Search" && <Extractivesearch toggling={() => handleToggle(index)}/>}
+                {info === "FAQ Search" && <Faqsearch toggling={() => handleToggle(index)}/>}
+                {info === "Document Upload" && <Documentupload toggling={() => handleToggle(index)}/>}
               </div>
             )}
           </div>
