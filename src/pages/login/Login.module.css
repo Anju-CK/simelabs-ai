@@ -51,6 +51,11 @@
   color: rgb(56, 136, 168);
   margin-left: 5px;
 }
+.signup:hover,
+.signup:focus,
+.signup:active {
+  color: rgb(8, 56, 76);
+}
 .error {
   margin-top: 1px;
   color: red;
@@ -70,4 +75,8 @@
   right: 10px;
   top: 60%;
   transform: translateY(-50%);
+}
+.gifimage{
+  width: 25px;
+  height: 19px;
 }

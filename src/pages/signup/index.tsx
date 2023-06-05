@@ -6,9 +6,10 @@ import useApi from "../../hooks/useApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import loadingGif from "../../assets/gif/loader.gif";
 
 export default function Signup() {
-  const { data, error, fetchData } = useApi(
+  const { data, error,loading, fetchData } = useApi(
     "/users/register/",
     "POST",
     undefined,
@@ -167,7 +168,7 @@ export default function Signup() {
                   />
                 </div>
                 <button type="submit" className={styles.signup}>
-                  signup
+                  {loading?<img src={loadingGif} alt="Loading..." className={styles.gifimage}/> : 'Sign up'}
                 </button>
                 <div className={styles.return}>
                   Back to{" "}

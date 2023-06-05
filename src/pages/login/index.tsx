@@ -7,12 +7,13 @@ import useApi from "../../hooks/useApi";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import loadingGif from "../../assets/gif/loader.gif";
 
 export default function Login() {
   const [loginError, setLoginError] = useState<string | undefined>(undefined);
 
   const navigate = useNavigate();
-  const { data, error, fetchData } = useApi(
+  const { data, error,loading, fetchData } = useApi(
     "/users/login/",
     "POST",
     undefined,
@@ -105,7 +106,7 @@ export default function Login() {
                   />
                 </div>
                 <button type="submit" name="login" className={styles.login}>
-                  login
+                {loading?<img src={loadingGif} alt="Loading..." className={styles.gifimage}/> : 'Login'}
                 </button>
                 <span className={styles.error}>
                   {loginError !== undefined ? loginError : ""}

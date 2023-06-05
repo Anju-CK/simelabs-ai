@@ -59,6 +59,11 @@
   font-weight: bold;
   color: rgb(56, 136, 168);
 }
+.login:hover,
+.login:focus,
+.login:active {
+  color: rgb(8, 56, 76);
+}
 .error {
   color: red;
 }
@@ -70,4 +75,8 @@
   right: 10px;
   top: 60%;
   transform: translateY(-50%);
+}
+.gifimage{
+  width: 25px;
+  height: 19px;
 }
