@@ -34,16 +34,22 @@ export default function Registeredfaces() {
     if (data && data?.message?.length > 0) {
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
-      setTableData(
-        data?.message.slice(startIndex, endIndex).map((item:any, index:number) => ({
-          id: index + 1,
-          name: item.name,
-          designation: item.designation,
-          email: item.email,
-        }))
-      );
+      const slicedData = data.message.slice(startIndex, endIndex).map((item: any, index: number) => ({
+        id: index + 1,
+        name: item.name,
+        designation: item.designation,
+        email: item.email,
+      }));
+
+      setTableData(slicedData);
+  
+      // Check if the current page becomes empty after deletion
+      if (slicedData.length === 0 && currentPage > 1) {
+        setCurrentPage(currentPage - 1); // Update to the previous page
+      }
     }
   }, [data, currentPage]);
+  
 
   const updateData = () => {
     fetchData();
