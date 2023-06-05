@@ -17,6 +17,7 @@
   flex-direction: row;
   text-decoration: underline;
   cursor: pointer;
+  color: rgb(8, 56, 76);
 }
 .container2 {
   display: flex;
