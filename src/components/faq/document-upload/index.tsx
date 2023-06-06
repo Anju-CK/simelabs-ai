@@ -5,6 +5,9 @@ import useFetch from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loadingGif from "../../../assets/gif/loader.gif";
+import Modalcomponent from "../../modalcomponent";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 interface FormValues {
@@ -18,6 +21,8 @@ interface DocumentuploadProps{
 }
 
 export default function Documentupload(props:DocumentuploadProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const { data, error,loading, fetchData } = useFetch(
     "/oxylym_faq/document_upload/",
     "POST",
@@ -42,14 +47,18 @@ export default function Documentupload(props:DocumentuploadProps) {
         autoClose: 1000,
       });
     },
-    () => {
-      toast.error("Something went wrong", {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: 1000,
-      });
+    (error) => {
+      if (error && error.message ) {
+        setIsModalOpen(true); // Open the modal for hit limit exceeded
+      } else {
+        // toast.error("Something went wrong", {
+        //   position: toast.POSITION.BOTTOM_CENTER,
+        //   autoClose: 1000,
+        // });
+      }
     });
   };
-  console.log("data:", data);
+  console.log("data:", error);
   return (
     <div className={styles.container}>
       <Formik
@@ -165,7 +174,7 @@ export default function Documentupload(props:DocumentuploadProps) {
                 type="submit"
                 className={styles.btntxt + " " + styles.upload}
               >
-                {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Upload'}
+                {loading ? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Upload'}
               </button>
               <button
                 type="reset"
@@ -184,6 +193,21 @@ export default function Documentupload(props:DocumentuploadProps) {
           </Form>
         )}
       </Formik>
+      {!loading && error && 
+        <Modalcomponent
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          props.toggling();
+          navigate("/home");
+        }}
+      >
+          {
+            <div>
+              {error?.message}
+            </div>
+          }
+      </Modalcomponent>}
     </div>
   );
 }
