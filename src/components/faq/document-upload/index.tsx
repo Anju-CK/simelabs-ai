@@ -22,6 +22,7 @@ interface DocumentuploadProps{
 
 export default function Documentupload(props:DocumentuploadProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHide, setIsHide] = useState(false);
   const navigate = useNavigate();
   const { data, error,loading, fetchData } = useFetch(
     "/oxylym_faq/document_upload/",
@@ -30,6 +31,7 @@ export default function Documentupload(props:DocumentuploadProps) {
     false
   );
   const onSubmitHandler = (values: FormValues) => {
+    setIsHide(true)
     const { document } = values;
     const formData = new FormData();
     for (const [key, value] of Object.entries(values)) {
@@ -41,6 +43,7 @@ export default function Documentupload(props:DocumentuploadProps) {
     }
     fetchData(formData,
       () => {
+       
       props.toggling();
       toast.success("Uploading Successful!", {
         position: toast.POSITION.BOTTOM_CENTER,
@@ -176,7 +179,7 @@ export default function Documentupload(props:DocumentuploadProps) {
               >
                 {loading ? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Upload'}
               </button>
-              <button
+              {!isHide?  <button
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
                 onClick={() => {
@@ -188,7 +191,7 @@ export default function Documentupload(props:DocumentuploadProps) {
                 }}
               >
                 Cancel
-              </button>
+              </button>:null}
             </div>
           </Form>
         )}

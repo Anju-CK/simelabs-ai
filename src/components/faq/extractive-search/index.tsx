@@ -14,6 +14,7 @@ interface ExtractivesearchProps{
 export default function Extractivesearch(props:ExtractivesearchProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [isHide, setIsHide] = useState(false);
 
   const { data, error,loading, fetchData } = useApi(
     "/oxylym_faq/extractive_search/",
@@ -22,6 +23,7 @@ export default function Extractivesearch(props:ExtractivesearchProps) {
     false
   );
   const onSubmitHandler = (values: any) => {
+    setIsHide(true)
     fetchData(values);
   };
 
@@ -145,12 +147,12 @@ export default function Extractivesearch(props:ExtractivesearchProps) {
                 {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Search'}
                 {/* Search */}
               </button>
-              <button
+              {!isHide? <button
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
               >
                 Cancel
-              </button>
+              </button>:null}
             </div>
           </Form>
         )}

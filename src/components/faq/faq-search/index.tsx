@@ -14,6 +14,7 @@ interface FaqsearchProps{
 export default function Faqsearch(props:FaqsearchProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [isHide, setIsHide] = useState(false);
 
   const { data, error, loading,fetchData } = useApi(
     "/oxylym_faq/faq_search/",
@@ -22,6 +23,7 @@ export default function Faqsearch(props:FaqsearchProps) {
     false
   );
   const onSubmitHandler = (values: any) => {
+    setIsHide(true)
     fetchData(values);
 
     console.log(values);
@@ -146,12 +148,12 @@ export default function Faqsearch(props:FaqsearchProps) {
                 {loading? <img src={loadingGif} alt="Loading..." className={styles.gifimage} /> :'Search'}
                 {/* Search */}
               </button>
-              <button
+              {!isHide?<button
                 type="reset"
                 className={styles.btntxt + " " + styles.cancel}
               >
                 Cancel
-              </button>
+              </button>:null}
             </div>
           </Form>
         )}
