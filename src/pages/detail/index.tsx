@@ -30,6 +30,7 @@ export default function Detail() {
   useEffect(() => {
     fetchData();
   }, []);
+  
   return (
     <div>
       <Dashboardlayout>
@@ -40,8 +41,8 @@ export default function Detail() {
        : 
         <div className={styles.container}>
           {data &&
-            Object.keys(data?.message).map((keyName) => (
-              <Dropdown key={keyName} options={data.message[keyName]} name={keyName} />
+            Object.keys(data?.message).map((keyName, index) => (
+              <Dropdown  options={data.message[keyName]} name={keyName} id={index} />
             ))}
         </div>}
       </Dashboardlayout>

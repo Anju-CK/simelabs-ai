@@ -16,12 +16,11 @@ export default function Dropdown(props: any) {
   const handleToggle = (index: number) => {
     setOpen(open === index ? null : index);
   };
-
   const location = useLocation();
   const id = location.state?.index || 0;
   return (
     <div>
-      {id === 1 &&
+      {id === props.id && 
         props.name.replace(/\s/g, "").toLowerCase() === "facedetection" &&
         props.options.map((info: string, index: number) => (
           <div className={styles.container} key={index}>
@@ -41,7 +40,7 @@ export default function Dropdown(props: any) {
             )}
           </div>
         ))}
-      {id === 0 &&
+      {id === props.id &&
         props.name.replace(/\s/g, "").toLowerCase() === "objectdetection" &&
         props.options.map((info: string, index: number) => (
           <div className={styles.container} key={index}>
@@ -62,7 +61,7 @@ export default function Dropdown(props: any) {
             )}
           </div>
         ))}
-      {id === 2 &&
+      {id === props.id &&
         props.name.replace(/\s/g, "").toLowerCase() === "faq" &&
         props.options.map((info: string, index: number) => (
           <div className={styles.container} key={index}>
